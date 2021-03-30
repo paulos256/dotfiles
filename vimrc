@@ -104,8 +104,6 @@ nnoremap <silent><Leader>wt :wincmd T<CR>
 nnoremap <C-Left> gT
 nnoremap <C-Right> gt
 
-" automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
-autocmd FileType netrw setl bufhidden=delete
 let g:netrw_banner = 1
 let g:netrw_liststyle = 1
 let g:netrw_browse_split = 3
@@ -125,9 +123,6 @@ nnoremap <Leader>+ :resize -2<CR>
 nnoremap <Leader>rp :resize 100<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-nnoremap <expr> n 'Nn'[v:searchforward]
-nnoremap <expr> N 'nN'[v:searchforward]
 
 nnoremap <S-r> <nop>
 " nnoremap <C-p> <nop>
@@ -154,7 +149,6 @@ vnoremap <Leader>P "+P
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
 
-nnoremap gV '[v']
 vnoremap < <gv
 vnoremap > >gv
 
@@ -163,10 +157,6 @@ nnoremap S i<CR><Right><ESC>
 " get out of insert mode
 inoremap <C-c> <ESC>
 " inoremap kj <ESC>
-" inoremap <ESC> <nop>
-
-" movement: inside next parens
-" onoremap in( :<C-U>normal! f(vi(<CR>
 
 " Toggle spelling hints
 nnoremap <Silent><Leader>ts :set spell!<CR>
@@ -265,7 +255,10 @@ augroup mm_buf_cmds
 		autocmd InsertLeave * set colorcolumn=""
 	endif
 
-	autocmd CursorMoved * if (expand('<cword>') =~ @/) | set hlsearch | else | set nohlsearch | endif
+	autocmd CursorMoved * if (expand('<cWORD>') =~ @/) | set hlsearch | else | set nohlsearch | endif
+
+	" automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
+	autocmd FileType netrw setl bufhidden=delete
 
 " 	" Sets the current directory to the opened file
 " 	autocmd BufEnter * silent! lcd %:p:h

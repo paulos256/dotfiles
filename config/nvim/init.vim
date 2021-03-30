@@ -65,5 +65,9 @@ endif
 inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
 			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+" n is always forward, N is always back
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
+
 " All baseline remaps and abbrevs and sets
 source ~/.vimrc
