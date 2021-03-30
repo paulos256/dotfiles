@@ -7,11 +7,11 @@ Plug 'ambv/black'
 
 Plug 'dense-analysis/ale' " javascript async linter
 Plug 'rust-lang/rust.vim'
-Plug 'tweekmonster/gofmt.vim'
+" Plug 'tweekmonster/gofmt.vim'
 Plug 'ap/vim-css-color'
-Plug 'ledger/vim-ledger'
-Plug 'mileszs/ack.vim'
-Plug 'scrooloose/nerdtree'
+" Plug 'ledger/vim-ledger'
+" Plug 'mileszs/ack.vim'
+" Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 
 Plug 'tpope/vim-telescope'
