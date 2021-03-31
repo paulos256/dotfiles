@@ -60,8 +60,6 @@ let maplocalleader = " "
 " to mean the next line on the screen
 noremap j gj
 noremap k gk
-noremap 0 g0
-noremap $ g$
 
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
@@ -80,19 +78,31 @@ autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
 " These are things that I mistype and want ignored.
-nmap Q  <silent>
-nmap q: <silent>
-nmap K  <silent>
+nnoremap Q  <silent>
+nnoremap q: <silent>
 
-" Navigation
-nnoremap <C-S-Left> :bp<CR>
-nnoremap <C-S-Right> :bn<CR>
+" Buffers
 nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>B :ls!<CR>:b
 nnoremap <Leader>Q :bd<CR>
 
-nnoremap <C-k> :cnext<CR>
-nnoremap <C-j> :cprev<CR>
+" Navigation
+nnoremap <C-S-Left> :bp<CR>
+nnoremap <C-S-Right> :bn<CR>
+
+nnoremap <C-h> gT
+nnoremap <C-l> gt
+nnoremap <C-Left> gT
+nnoremap <C-Right> gt
+
+" Jump up, jump up to get down!
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
+vnoremap <C-j> <C-d>
+vnoremap <C-k> <C-u>
+
+nnoremap <A-k> :cnext<CR>
+nnoremap <A-j> :cprev<CR>
 nnoremap <Leader>' :copen<CR>
 
 nnoremap <Leader>h :wincmd h<CR>
@@ -101,16 +111,17 @@ nnoremap <Leader>k :wincmd k<CR>
 nnoremap <Leader>l :wincmd l<CR>
 nnoremap <Leader>q :wincmd c<CR>
 nnoremap <silent><Leader>wt :wincmd T<CR>
-nnoremap <C-Left> gT
-nnoremap <C-Right> gt
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Help and windows and Sex!
 let g:netrw_banner = 1
 let g:netrw_liststyle = 1
 let g:netrw_browse_split = 3
 let g:netrw_winsize = 25
 nnoremap <Leader>dir :Sex!<CR>
-
-" Help and windows and Sex!
+nnoremap <Leader>cd :cd %:p:h
 nnoremap <Leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <Leader>srw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <Leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
@@ -121,8 +132,6 @@ nnoremap <Leader>_ :vertical resize -5<CR>
 nnoremap <Leader>= :resize +2<CR>
 nnoremap <Leader>+ :resize -2<CR>
 nnoremap <Leader>rp :resize 100<CR>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 
 nnoremap <S-r> <nop>
 " nnoremap <C-p> <nop>
