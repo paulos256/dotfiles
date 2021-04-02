@@ -1,6 +1,6 @@
 set guicursor=n-v:block,i-c-ci-ve:ver90,o:hor50,a:blinkoff0-Cursor/lCursor
   \,r-cr:block-blinkwait100-blinkoff100-blinkon100
-" set hidden  " allow dirty background buffers
+set nohidden  " DON'T allow dirty background buffers. Clean it up the first time!
 set noerrorbells
 set visualbell
 set nowrap
@@ -121,7 +121,7 @@ let g:netrw_liststyle = 1
 let g:netrw_browse_split = 3
 let g:netrw_winsize = 25
 nnoremap <Leader>dir :Sex!<CR>
-nnoremap <Leader>cd :cd %:p:h
+nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <Leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <Leader>srw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <Leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
