@@ -1,6 +1,6 @@
 augroup FILETYPE_PYTHON
 	autocmd!
-	autocmd FileType python :iabbrev <buffer> iff if:<left>
+	autocmd FileType python :iabbrev <buffer> iff if :<left>
 augroup END
 
 augroup FILETYPE_JAVASCRIPT
@@ -13,10 +13,10 @@ augroup FILETYPE_VIMSCRIPT
 	autocmd FileType vim setlocal commentstring=\"\ %s
 augroup END
 
-augroup FILETYPE_RUST
-	autocmd!
-	autocmd! FileType rust :nnorem
-augroup END
+" augroup FILETYPE_RUST
+" 	autocmd!
+" 	autocmd! FileType rust :nnorem
+" augroup END
 
 
 
