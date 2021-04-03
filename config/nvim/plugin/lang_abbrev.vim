@@ -1,6 +1,12 @@
 augroup FILETYPE_PYTHON
 	autocmd!
-	autocmd FileType python :iabbrev <buffer> iff if :<left>
+	autocmd FileType python iabbrev <buffer> iff if :<left>
+	autocmd FileType python setlocal nolist ts=2 sts=2 sw=2 noet nosr
+
+	autocmd FileType python nmap <Leader>go :call PythonExecute<CR>
+	fun! PythonExecute()
+		:!python expand('%:p')
+	endfunction
 augroup END
 
 augroup FILETYPE_JAVASCRIPT
