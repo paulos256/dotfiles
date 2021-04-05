@@ -1,23 +1,24 @@
 set exrc " Wont open project .nvimrc without this here
 
-call plug#begin('~\AppData\Local\nvim\plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Yes, I am a sneaky snek now
 Plug 'ambv/black'
 
 Plug 'dense-analysis/ale' " javascript async linter
 Plug 'rust-lang/rust.vim'
-Plug 'tweekmonster/gofmt.vim'
+" Plug 'tweekmonster/gofmt.vim'
 Plug 'ap/vim-css-color'
-Plug 'ledger/vim-ledger'
-Plug 'mileszs/ack.vim'
-Plug 'scrooloose/nerdtree'
+" Plug 'ledger/vim-ledger'
+" Plug 'mileszs/ack.vim'
+" Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 
-Plug 'tpope/vim-telescope'
+" Plug 'tpope/vim-telescope'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -31,8 +32,8 @@ Plug 'vim-utils/vim-man'
 Plug 'vim-scripts/openvpn'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'junegunn/fzf.vim'
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Plug 'junegunn/fzf.vim'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -47,7 +48,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Cheat Sheet
-Plug 'dbeniamine/cheat.sh-vim'
+" Plug 'dbeniamine/cheat.sh-vim'
 
 call plug#end()
 

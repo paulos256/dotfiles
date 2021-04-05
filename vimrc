@@ -110,7 +110,7 @@ nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>srw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader><CR> :so ~/AppData/Local/nvim/init.vim<CR>
+nnoremap <Leader><CR> :so $MYVIMRC<CR>
 nnoremap <Leader>- :vertical resize +5<CR>
 nnoremap <Leader>_ :vertical resize -5<CR>
 nnoremap <Leader>= :resize +2<CR>
@@ -163,7 +163,8 @@ iabbrev tehn then
 iabbrev Pual Paul
 
 fun! EditInitVim()
-	:tabnew ~/AppData/Local/nvim/init.vim
+	:tabnew $MYVIMRC
+	:new ~/.vimrc
 endfunction
 
 fun! EmptyRegisters()
@@ -252,6 +253,7 @@ augroup END
 
 augroup mm_buf_cmds
 	" Color Column (only on insert)
+	autocmd!
 	if exists ("&colorcolumn")
 		autocmd InsertEnter * set colorcolumn=80
 		autocmd InsertLeave * set colorcolumn=""
