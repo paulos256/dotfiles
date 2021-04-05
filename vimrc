@@ -1,8 +1,11 @@
 set guicursor=n-v:block,i-c-ci-ve:ver90,o:hor50,a:blinkoff0-Cursor/lCursor
   \,r-cr:block-blinkwait100-blinkoff100-blinkon100
-" set hidden  " allow dirty background buffers
+set nohidden  " DON'T allow dirty background buffers. Clean it up the first time!
 set noerrorbells
 set visualbell
+set nowrap
+set formatoptions+=1qjro
+
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set shiftround                   " Shift to certain columns, not just n spaces
@@ -14,18 +17,20 @@ set copyindent                   " Make autoindent use the same chars as prev li
 set cinkeys-=0#                  " Comments don't fiddle with indenting
 set linebreak                    " Break long lines by word, not char
 set nostartofline
+
 set nu
 set relativenumber
 " set nohlsearch
-set nowrap
+
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
+
 set incsearch
 set ignorecase
 set smartcase
-set gdefault
+set gdefault                " use the search option 'g' by default
 silent! set mouse=nvc       " Use the mouse, but not in insert mode
 set termguicolors
 set scrolloff=8
@@ -53,8 +58,8 @@ let maplocalleader = " "
 
 " Turn off linewise keys. I want this to act more visually -- I want `down'
 " to mean the next line on the screen
-nmap j gj
-nmap k gk
+noremap j gj
+noremap k gk
 
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
@@ -73,63 +78,76 @@ autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
 " These are things that I mistype and want ignored.
-nmap Q  <silent>
-nmap q: <silent>
-nmap K  <silent>
+nnoremap Q  <silent>
+nnoremap q: <silent>
+
+" Buffers
+nnoremap <Leader>b :ls<CR>:b
+nnoremap <Leader>B :ls!<CR>:b
+nnoremap <Leader>Q :bd<CR>
 
 " Navigation
 nnoremap <C-S-Left> :bp<CR>
 nnoremap <C-S-Right> :bn<CR>
-nnoremap <leader>b :ls<CR>:b
-nnoremap <leader>B :ls!<CR>:b
-nnoremap <leader>Q :bd<CR>
 
-nnoremap <C-k> :cnext<CR>
-nnoremap <C-j> :cprev<CR>
-nnoremap <leader>' :copen<CR>
-
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>q :wincmd c<CR>
-nnoremap <silent><leader>wt :wincmd T<CR>
+nnoremap <C-h> gT
+nnoremap <C-l> gt
 nnoremap <C-Left> gT
 nnoremap <C-Right> gt
 
-" automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
-autocmd FileType netrw setl bufhidden=delete
+" Jump up, jump up to get down!
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
+vnoremap <C-j> <C-d>
+vnoremap <C-k> <C-u>
+
+nnoremap <A-k> :cnext<CR>
+nnoremap <A-j> :cprev<CR>
+nnoremap <Leader>' :copen<CR>
+
+nnoremap <Leader>h :wincmd h<CR>
+nnoremap <Leader>j :wincmd j<CR>
+nnoremap <Leader>k :wincmd k<CR>
+nnoremap <Leader>l :wincmd l<CR>
+nnoremap <Leader>q :wincmd c<CR>
+nnoremap <silent><Leader>wt :wincmd T<CR>
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Help and windows and Sex!
 let g:netrw_banner = 1
 let g:netrw_liststyle = 1
 let g:netrw_browse_split = 3
 let g:netrw_winsize = 25
-nnoremap <leader>dir :Sex!<CR>
 
 " Help and windows and Sex!
+nnoremap <leader>dir :Sex!<CR>
+nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>srw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader><CR> :so $MYVIMRC<CR>
+
 nnoremap <Leader>- :vertical resize +5<CR>
 nnoremap <Leader>_ :vertical resize -5<CR>
 nnoremap <Leader>= :resize +2<CR>
 nnoremap <Leader>+ :resize -2<CR>
 nnoremap <Leader>rp :resize 100<CR>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 
 nnoremap <S-r> <nop>
 " nnoremap <C-p> <nop>
 
 " greatest remap ever
 " vnoremap p "_dP
-
 " greatest remap replacement
 vnoremap ")P "0P
 nnoremap ")P "0P
 vnoremap '0p "0p
 nnoremap '0p "0p
+
+nnoremap Y y$
 
 " next greatest remap ever : asbjornHaland
 nnoremap <Leader>y "+y
@@ -143,15 +161,14 @@ vnoremap <Leader>P "+P
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
 
+vnoremap < <gv
+vnoremap > >gv
+
 nnoremap S i<CR><Right><ESC>
 
 " get out of insert mode
 inoremap <C-c> <ESC>
 " inoremap kj <ESC>
-" inoremap <ESC> <nop>
-
-" movement: inside next parens
-" onoremap in( :<C-U>normal! f(vi(<CR>
 
 " Toggle spelling hints
 nnoremap <Silent><Leader>ts :set spell!<CR>
@@ -173,12 +190,6 @@ fun! EmptyRegisters()
         call setreg(r, [])
     endfor
 endfun
-
-" fun! SearchForWord()
-" 	call setreg("/", expand("<cword>"))
-" 	set hlsearch
-" endfun
-" nnoremap // :call SearchForWord()<CR>
 
 " Stay on the same line when window switching
 function! KeepCurrentLine(motion)
@@ -227,14 +238,6 @@ fun! s:get_visual_selection()
     let lines[0] = lines[0][column_start - 1:]
     return join(lines, "\n")
 endfunction
-" " Strip trailing whitespace
-" function! StripWhitespace()
-" 	let save_cursor = getpos(".")
-" 	let old_query = getreg('/')
-" 	:%s/\s\+$//e
-" 	call setpos('.', save_cursor)
-" 	call setreg('/', old_query)
-" endfunction
 
 " Custom mode for distraction-free editing
 function! ProseMode()
@@ -251,7 +254,14 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
+" fun! SearchForWord()
+" 	call setreg("/", expand("<cword>"))
+" 	set hlsearch
+" endfun
+" nnoremap // :call SearchForWord()<CR>
+
 augroup mm_buf_cmds
+	autocmd!
 	" Color Column (only on insert)
 	autocmd!
 	if exists ("&colorcolumn")
@@ -259,7 +269,10 @@ augroup mm_buf_cmds
 		autocmd InsertLeave * set colorcolumn=""
 	endif
 
-	autocmd CursorMoved * if (expand('<cword>') =~ @/) | set hlsearch | else | set nohlsearch | endif
+	autocmd CursorMoved * if (expand('<cWORD>') =~ @/) | set hlsearch | else | set nohlsearch | endif
+
+	" automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
+	autocmd FileType netrw setl bufhidden=delete
 
 " 	" Sets the current directory to the opened file
 " 	autocmd BufEnter * silent! lcd %:p:h
@@ -279,49 +292,48 @@ augroup THE_PRIMEAGEN
 	autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 "
-" Reset all autocommands
 augroup vimrc_filetypes
-autocmd!
+	autocmd!
 
-au BufNewFile,BufRead *.cson    set ft=coffee
-au BufNewFile,BufRead *.glsl    setf glsl
-au BufNewFile,BufRead *.gyp     set ft=python
-au BufNewFile,BufRead *.html    setlocal nocindent smartindent
-au BufNewFile,BufRead *.i7x     setf inform7
-au BufNewFile,BufRead *.ini     setf conf
-au BufNewFile,BufRead *.journal setlocal tw=0 ts=4 sw=4 et
-au BufNewFile,BufRead *.json    set ft=json tw=0
-au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
-au BufNewFile,BufRead *.lkml    setf yaml
-au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
-au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
-au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
-au BufNewFile,BufRead *.plist   setf xml
-au BufNewFile,BufRead *.rb      setlocal noai
-au BufNewFile,BufRead *.rxml    setf ruby
-au BufNewFile,BufRead *.sass    setf sass
-au BufNewFile,BufRead *.ttml    setf xml
-au BufNewFile,BufRead *.vert,*.frag set ft=glsl
-au BufNewFile,BufRead *.xml     setlocal ft=xml ts=2 sw=2 et
-au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
-au BufNewFile,BufRead *.zsh     setf zsh
-au BufNewFile,BufRead *.ovpn    setf openvpn
-au BufNewFile,BufRead *templates/*.html setf htmldjango
-au BufNewFile,BufRead .conkyrc set ft=lua
-au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
-au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
-au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
-au BufNewFile,BufRead .zshlocal setf zsh
-au BufNewFile,BufRead /tmp/crontab* setf crontab
-au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
-au BufNewFile,BufRead Makefile setlocal nolist
+	au BufNewFile,BufRead *.cson    set ft=coffee
+	au BufNewFile,BufRead *.glsl    setf glsl
+	au BufNewFile,BufRead *.gyp     set ft=python
+	au BufNewFile,BufRead *.html    setlocal nocindent smartindent
+	au BufNewFile,BufRead *.i7x     setf inform7
+	au BufNewFile,BufRead *.ini     setf conf
+	au BufNewFile,BufRead *.journal setlocal tw=0 ts=4 sw=4 et
+	au BufNewFile,BufRead *.json    set ft=json tw=0
+	au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
+	au BufNewFile,BufRead *.lkml    setf yaml
+	au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
+	au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
+	au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
+	au BufNewFile,BufRead *.plist   setf xml
+	au BufNewFile,BufRead *.rb      setlocal noai
+	au BufNewFile,BufRead *.rxml    setf ruby
+	au BufNewFile,BufRead *.sass    setf sass
+	au BufNewFile,BufRead *.ttml    setf xml
+	au BufNewFile,BufRead *.vert,*.frag set ft=glsl
+	au BufNewFile,BufRead *.xml     setlocal ft=xml ts=2 sw=2 et
+	au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
+	au BufNewFile,BufRead *.zsh     setf zsh
+	au BufNewFile,BufRead *.ovpn    setf openvpn
+	au BufNewFile,BufRead *templates/*.html setf htmldjango
+	au BufNewFile,BufRead .conkyrc set ft=lua
+	au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
+	au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
+	au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
+	au BufNewFile,BufRead .zshlocal setf zsh
+	au BufNewFile,BufRead /tmp/crontab* setf crontab
+	au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
+	au BufNewFile,BufRead Makefile setlocal nolist
 
-au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
-au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
-au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
-au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
-au FileType markdown syn sync fromstart
-au Filetype gitcommit setlocal tw=80
-au Filetype csv setlocal nocursorline
+	au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
+	au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
+	au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+	au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
+	au FileType markdown syn sync fromstart
+	au Filetype gitcommit setlocal tw=80
+	au Filetype csv setlocal nocursorline
 
 augroup END
