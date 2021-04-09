@@ -1,12 +1,17 @@
 set exrc " Wont open project .nvimrc without this here
 
-call plug#begin('~/.config/nvim/plugged')
+if has('win32') || has('win64')
+  let g:config_home = '~/AppData/Local/nvim'
+else
+  let g:config_home = '~/.config/nvim'
+endif
+call plug#begin(g:config_home . '/plugged')
 
 " Yes, I am a sneaky snek now
 Plug 'ambv/black'
 
 Plug 'dense-analysis/ale' " javascript async linter
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'tweekmonster/gofmt.vim'
 Plug 'ap/vim-css-color'
 " Plug 'ledger/vim-ledger'
@@ -20,6 +25,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-unimpaired'
+	" gc, gcc, etc.  autocmd FileType apache setlocal commentstring=#\ %s
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 	" cs'] 'Hello' [Hello]
@@ -27,7 +33,6 @@ Plug 'tpope/vim-repeat'
 	" yss<p id="machine"> surrounds the line with the p tag
 	" yss{ surrounds line with {}
 Plug 'tpope/vim-surround'
-	" gc, gcc, etc.  autocmd FileType apache setlocal commentstring=#\ %s
 Plug 'vim-utils/vim-man'
 Plug 'vim-scripts/openvpn'
 Plug 'wellle/targets.vim'
