@@ -10,6 +10,7 @@ call plug#begin(g:config_home . '/plugged')
 " Yes, I am a sneaky snek now
 Plug 'ambv/black'
 
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'dense-analysis/ale' " javascript async linter
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'tweekmonster/gofmt.vim'
