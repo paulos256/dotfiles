@@ -1,4 +1,4 @@
-set guicursor=n-v:block,i-c-ci-ve:ver90,o:hor50,a:blinkoff0-Cursor/lCursor
+set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
   \,r-cr:block-blinkwait100-blinkoff100-blinkon100
 set nohidden  " DON'T allow dirty background buffers. Clean it up the first time!
 set noerrorbells
