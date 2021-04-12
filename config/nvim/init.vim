@@ -39,7 +39,7 @@ Plug 'vim-scripts/openvpn'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'junegunn/fzf' { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
