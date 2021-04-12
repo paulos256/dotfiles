@@ -38,8 +38,9 @@ Plug 'vim-utils/vim-man'
 Plug 'vim-scripts/openvpn'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'junegunn/fzf' { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -71,6 +72,9 @@ endif
 " Select and use first in coc autocomplete list
 inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
 			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+nmap gd <Plug>(coc-definition)
+nmap gr <Plug>(coc-references)
+nnoremap <C-p> :GFiles<CR>
 
 " n is always forward, N is always back
 nnoremap <expr> n 'Nn'[v:searchforward]
