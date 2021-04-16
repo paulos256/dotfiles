@@ -19,12 +19,17 @@ Plug 'ap/vim-css-color'
 " Plug 'mileszs/ack.vim'
 " Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'octol/vim-cpp-enhanced-highlight'
 
-" Plug 'tpope/vim-telescope'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-unimpaired'
 	" gc, gcc, etc.  autocmd FileType apache setlocal commentstring=#\ %s
 Plug 'tpope/vim-commentary'
@@ -34,13 +39,16 @@ Plug 'tpope/vim-repeat'
 	" yss<p id="machine"> surrounds the line with the p tag
 	" yss{ surrounds line with {}
 Plug 'tpope/vim-surround'
-Plug 'vim-utils/vim-man'
+
+" Plug 'vim-utils/vim-man'
 Plug 'vim-scripts/openvpn'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+Plug 'theprimeagen/vim-be-good'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -53,6 +61,8 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
+
+Plug 'hoob3rt/lualine.nvim'
 
 " Cheat Sheet
 " Plug 'dbeniamine/cheat.sh-vim'
@@ -75,6 +85,8 @@ inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
 nmap gd <Plug>(coc-definition)
 nmap gr <Plug>(coc-references)
 nnoremap <C-p> :GFiles<CR>
+
+nmap <leader>gs :G<CR>
 
 " n is always forward, N is always back
 nnoremap <expr> n 'Nn'[v:searchforward]

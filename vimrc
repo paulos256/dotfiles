@@ -103,7 +103,32 @@ vnoremap <C-k> <C-u>
 
 nnoremap <A-k> :cnext<CR>
 nnoremap <A-j> :cprev<CR>
-nnoremap <Leader>' :copen<CR>
+nnoremap <Leader>' :call ToggleQFList(1)<CR>
+nnoremap <Leader>" :call ToggleQFList(0)<CR>
+
+
+let g:the_primeagen_qf_g = 0
+let g:the_primeagen_qf_l = 0
+
+fun! ToggleQFList(global)
+	if a:global
+		if g:the_primeagen_qf_g == 1
+			let g:the_primeagen_qf_g = 0
+			cclose
+		else
+			let g:the_primeagen_qf_g = 1
+			copen
+		endif
+	else
+		if g:the_primeagen_qf_l == 1
+			let g:the_primeagen_qf_l = 0
+			lclose
+		else
+			let g:the_primeagen_qf_l = 1
+			lopen
+		endif
+	endif
+endfun
 
 nnoremap <Leader>h :wincmd h<CR>
 nnoremap <Leader>j :wincmd j<CR>
@@ -140,14 +165,8 @@ nnoremap <S-r> <nop>
 " nnoremap <C-p> <nop>
 
 " greatest remap ever
-" vnoremap p "_dP
+vnoremap p "_dP
 " greatest remap replacement
-vnoremap ")P "0P
-nnoremap ")P "0P
-vnoremap '0p "0p
-nnoremap '0p "0p
-
-nnoremap Y y$
 
 " next greatest remap ever : asbjornHaland
 nnoremap <Leader>y "+y
@@ -160,6 +179,10 @@ vnoremap <Leader>P "+P
 
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
+nnoremap Y y$
+
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left><Left>
+nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
 
 vnoremap < <gv
 vnoremap > >gv
