@@ -86,25 +86,62 @@ nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>B :ls!<CR>:b
 nnoremap <Leader>Q :bd<CR>
 
-" Navigation
-nnoremap <C-S-Left> :bp<CR>
-nnoremap <C-S-Right> :bn<CR>
+" Colemak Navigation
+noremap m h
+noremap h <Nop>
+noremap n j
+noremap N J
+noremap j e
+noremap J ge
+noremap e k
+noremap i l
+noremap k n
+noremap K N
+noremap l o
+noremap L O
+noremap o i
+noremap O :
 
-nnoremap <C-h> gT
-nnoremap <C-l> gt
-nnoremap <C-Left> gT
-nnoremap <C-Right> gt
+nnoremap <Leader>m :wincmd h<CR>
+nnoremap <Leader>n :wincmd j<CR>
+nnoremap <Leader>e :wincmd k<CR>
+nnoremap <Leader>i :wincmd l<CR>
+nnoremap <Leader>q :wincmd c<CR>
+nnoremap <Leader>wt :wincmd T<CR>
+
+nnoremap <C-S-M> :bp<CR>
+nnoremap <C-S-I> :bn<CR>
+
+nnoremap <C-m> gT
+nnoremap <C-i> gt
 
 " Jump up, jump up to get down!
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
-vnoremap <C-j> <C-d>
-vnoremap <C-k> <C-u>
+noremap <C-n> <C-y>
+noremap <C-e> <C-e>
 
-nnoremap <A-k> :cnext<CR>
-nnoremap <A-j> :cprev<CR>
+nnoremap <A-n> :cnext<CR>
+nnoremap <A-e> :cprev<CR>
 nnoremap <Leader>' :call ToggleQFList(1)<CR>
 nnoremap <Leader>" :call ToggleQFList(0)<CR>
+
+vnoremap N :m '>+1<CR>gv=gv
+vnoremap E :m '<-2<CR>gv=gv
+
+" " Destroy arrow keys in insert mode
+" inoremap <Up> <ESC><Up>
+" inoremap <Down> <ESC><Down>
+" inoremap <Left> <ESC><Left>
+" inoremap <Right> <ESC><Right>
+
+" Make arrow keys useful
+nnoremap <C-Up> ddkP
+nnoremap <C-Down> ddp
+nnoremap <C-Left> <<
+nnoremap <C-Right> >>
+vnoremap <C-Left> <gv
+vnoremap <C-Right> >gv
+vnoremap < <gv
+vnoremap > >gv
 
 
 let g:the_primeagen_qf_g = 0
@@ -129,16 +166,6 @@ fun! ToggleQFList(global)
 		endif
 	endif
 endfun
-
-nnoremap <Leader>h :wincmd h<CR>
-nnoremap <Leader>j :wincmd j<CR>
-nnoremap <Leader>k :wincmd k<CR>
-nnoremap <Leader>l :wincmd l<CR>
-nnoremap <Leader>q :wincmd c<CR>
-nnoremap <silent><Leader>wt :wincmd T<CR>
-
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 
 " Help and windows and Sex!
 let g:netrw_banner = 1
@@ -166,7 +193,6 @@ nnoremap <S-r> <nop>
 
 " greatest remap ever
 vnoremap p "_dP
-" greatest remap replacement
 
 " next greatest remap ever : asbjornHaland
 nnoremap <Leader>y "+y
@@ -184,14 +210,9 @@ nnoremap Y y$
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left><Left>
 nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
 
-vnoremap < <gv
-vnoremap > >gv
-
-nnoremap S i<CR><Right><ESC>
-
 " get out of insert mode
 inoremap <C-c> <ESC>
-" inoremap kj <ESC>
+" inoremap en <ESC>
 
 " Toggle spelling hints
 nnoremap <Silent><Leader>ts :set spell!<CR>
@@ -215,7 +236,7 @@ fun! EmptyRegisters()
 endfun
 
 " Stay on the same line when window switching
-function! KeepCurrentLine(motion)
+fun! KeepCurrentLine(motion)
   let theLine = line('.')
   let theCol = col('.')
   exec 'wincmd ' . a:motion
@@ -223,18 +244,18 @@ function! KeepCurrentLine(motion)
     call cursor(theLine, theCol)
   endif
 endfunction
-nnoremap <C-w>h :silent call KeepCurrentLine('h')<CR>
-nnoremap <C-w>l :silent call KeepCurrentLine('l')<CR>
+nnoremap <C-w>m :silent call KeepCurrentLine('h')<CR>
+nnoremap <C-w>i :silent call KeepCurrentLine('l')<CR>
 
 " Commands to send common keystrokes using tmux
 let g:tmux_console_pane = '0:0.0'
 let g:tmux_server_pane = '0:0.0'
-function TmuxPaneRepeat()
+fun! TmuxPaneRepeat()
   write
   silent execute ':!tmux send-keys -t' g:tmux_console_pane 'C-p' 'C-j'
   redraw!
 endfunction
-function TmuxPaneClear()
+fun! TmuxPaneClear()
   silent execute ':!tmux send-keys -t' g:tmux_server_pane 'C-j' 'C-j' 'C-j' 'C-j' 'C-j' 'C-j' 'C-j'
   redraw!
 endfunction
@@ -288,7 +309,7 @@ augroup mm_buf_cmds
 	" Color Column (only on insert)
 	autocmd!
 	if exists ("&colorcolumn")
-		autocmd InsertEnter * set colorcolumn=80
+		autocmd InsertEnter * set colorcolumn=81
 		autocmd InsertLeave * set colorcolumn=""
 	endif
 

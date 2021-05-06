@@ -30,7 +30,6 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
 	" gc, gcc, etc.  autocmd FileType apache setlocal commentstring=#\ %s
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
