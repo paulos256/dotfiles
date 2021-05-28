@@ -56,11 +56,6 @@ let loaded_matchparen = 1
 let mapleader = " "
 let maplocalleader = " "
 
-" Turn off linewise keys. I want this to act more visually -- I want `down'
-" to mean the next line on the screen
-noremap j gj
-noremap k gk
-
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
 
@@ -87,20 +82,34 @@ nnoremap <Leader>B :ls!<CR>:b
 nnoremap <Leader>Q :bd<CR>
 
 " Colemak Navigation
+" f-back
+noremap h ,
+" f-forward
+noremap , ;
+" set mark
+noremap ; m
+" home row movement
 noremap m h
-noremap h <Nop>
-noremap n j
-noremap N J
-noremap j e
-noremap J ge
-noremap e k
+noremap n gj
+noremap e gk
+onoremap n j
+onoremap e k
 noremap i l
+" bottom (H M L)
+noremap E L
+" end of word
+noremap j e
+" next/prev match
 noremap k n
 noremap K N
+" new line
 noremap l o
 noremap L O
+" insert (NOTE: I is still 'insert at line start')
 noremap o i
+" habit position for Ex mode
 noremap O :
+
 
 nnoremap <Leader>m :wincmd h<CR>
 nnoremap <Leader>n :wincmd j<CR>
@@ -112,10 +121,7 @@ nnoremap <Leader>wt :wincmd T<CR>
 nnoremap <C-S-M> :bp<CR>
 nnoremap <C-S-I> :bn<CR>
 
-nnoremap <C-m> gT
-nnoremap <C-i> gt
-
-" Jump up, jump up to get down!
+" Scroll the whole page up or down one line
 noremap <C-n> <C-y>
 noremap <C-e> <C-e>
 
@@ -143,6 +149,8 @@ vnoremap <C-Right> >gv
 vnoremap < <gv
 vnoremap > >gv
 
+" got sick of accidentally hitting this
+nnoremap U <Nop>
 
 let g:the_primeagen_qf_g = 0
 let g:the_primeagen_qf_l = 0
@@ -215,7 +223,8 @@ inoremap <C-c> <ESC>
 " inoremap en <ESC>
 
 " Toggle spelling hints
-nnoremap <Silent><Leader>ts :set spell!<CR>
+nnoremap <Leader>ts :set spell!<CR>
+nnoremap <Leader>wrap :setlocal wrap!<CR>
 
 iabbrev teh the
 iabbrev adn and
