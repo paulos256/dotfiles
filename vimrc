@@ -87,7 +87,7 @@ noremap h ,
 " f-forward
 noremap , ;
 " set mark
-noremap ; m
+noremap ` m
 " home row movement
 noremap m h
 noremap n gj
@@ -99,6 +99,8 @@ noremap i l
 noremap E L
 " end of word
 noremap j e
+" combine lines
+noremap N J
 " next/prev match
 noremap k n
 noremap K N
@@ -108,7 +110,7 @@ noremap L O
 " insert (NOTE: I is still 'insert at line start')
 noremap o i
 " habit position for Ex mode
-noremap O :
+noremap O <Nop>
 
 
 nnoremap <Leader>m :wincmd h<CR>
@@ -217,6 +219,7 @@ nnoremap Y y$
 
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left><Left>
 nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
+vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\')<CR>'<CR>
 
 " get out of insert mode
 inoremap <C-c> <ESC>
