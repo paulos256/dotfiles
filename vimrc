@@ -1,5 +1,5 @@
 set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
-  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
+"  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
 set nohidden  " DON'T allow dirty background buffers. Clean it up the first time!
 set noerrorbells
 set visualbell
@@ -27,6 +27,7 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 
+set inccommand=nosplit
 set incsearch
 set ignorecase
 set smartcase
@@ -35,11 +36,13 @@ silent! set mouse=nvc       " Use the mouse, but not in insert mode
 set termguicolors
 set scrolloff=8
 set list
+set lazyredraw
 set listchars=tab:\|\ ,extends:~,precedes:\^,trail:-
 set signcolumn=yes
 set isfname+=@-@
 set encoding=utf8           " UTF-8 by default
 
+set foldcolumn=1
 set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -82,12 +85,11 @@ nnoremap <Leader>B :ls!<CR>:b
 nnoremap <Leader>Q :bd<CR>
 
 " Colemak Navigation
-" f-back
+" f-back and forward
 noremap h ,
-" f-forward
 noremap , ;
-" set mark
-noremap ` m
+noremap gh g;
+noremap g, g,
 " home row movement
 noremap m h
 noremap n gj
@@ -104,19 +106,21 @@ noremap N J
 " next/prev match
 noremap k n
 noremap K N
+noremap gk gn
+noremap gK gN
 " new line
 noremap l o
 noremap L O
-" insert (NOTE: I is still 'insert at line start')
+" insert
 noremap o i
-" habit position for Ex mode
-noremap O <Nop>
+noremap O I
+" mark
+noremap ; m
 
-
-nnoremap <Leader>m :wincmd h<CR>
-nnoremap <Leader>n :wincmd j<CR>
-nnoremap <Leader>e :wincmd k<CR>
-nnoremap <Leader>i :wincmd l<CR>
+nnoremap <Leader><Left> :wincmd h<CR>
+nnoremap <Leader><Down> :wincmd j<CR>
+nnoremap <Leader><Up> :wincmd k<CR>
+nnoremap <Leader><Right> :wincmd l<CR>
 nnoremap <Leader>q :wincmd c<CR>
 nnoremap <Leader>wt :wincmd T<CR>
 
@@ -124,16 +128,19 @@ nnoremap <C-S-M> :bp<CR>
 nnoremap <C-S-I> :bn<CR>
 
 " Scroll the whole page up or down one line
-noremap <C-n> <C-y>
-noremap <C-e> <C-e>
+noremap <C-Up> <C-e>
+noremap <C-Down> <C-y>
 
 nnoremap <A-n> :cnext<CR>
 nnoremap <A-e> :cprev<CR>
 nnoremap <Leader>' :call ToggleQFList(1)<CR>
 nnoremap <Leader>" :call ToggleQFList(0)<CR>
 
-vnoremap N :m '>+1<CR>gv=gv
-vnoremap E :m '<-2<CR>gv=gv
+" Move up or down a line at a time
+vnoremap <A-Up> :m '>+1<CR>gv=gv
+vnoremap <A-Down> :m '<-2<CR>gv=gv
+nnoremap <A-Up> ddkP
+nnoremap <A-Down> ddp
 
 " " Destroy arrow keys in insert mode
 " inoremap <Up> <ESC><Up>
@@ -141,9 +148,6 @@ vnoremap E :m '<-2<CR>gv=gv
 " inoremap <Left> <ESC><Left>
 " inoremap <Right> <ESC><Right>
 
-" Make arrow keys useful
-nnoremap <C-Up> ddkP
-nnoremap <C-Down> ddp
 nnoremap <C-Left> <<
 nnoremap <C-Right> >>
 vnoremap <C-Left> <gv
@@ -213,9 +217,8 @@ nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-nnoremap <Leader>d "_d
-vnoremap <Leader>d "_d
 nnoremap Y y$
+nnoremap s "_d
 
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left><Left>
 nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>

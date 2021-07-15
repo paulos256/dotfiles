@@ -88,8 +88,8 @@ nnoremap <C-p> :GFiles<CR>
 nmap <leader>gs :G<CR>
 
 " n is always forward, N is always back
-nnoremap <expr> n 'Nn'[v:searchforward]
-nnoremap <expr> N 'nN'[v:searchforward]
+nnoremap <expr> k 'Kk'[v:searchforward]
+nnoremap <expr> K 'kK'[v:searchforward]
 
 " All baseline remaps and abbrevs and sets
 source ~/.vimrc
