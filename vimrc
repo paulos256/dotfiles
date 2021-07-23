@@ -1,7 +1,8 @@
 set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
 "  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
-set nohidden  " DON'T allow dirty background buffers. Clean it up the first time!
+set hidden  " allow dirty background buffers
 set noerrorbells
+set notimeout
 set visualbell
 set nowrap
 set formatoptions+=1qjro
@@ -20,7 +21,7 @@ set nostartofline
 
 set nu
 set relativenumber
-" set nohlsearch
+set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap
 
 set noswapfile
 set nobackup
@@ -142,6 +143,8 @@ vnoremap <A-Down> :m '<-2<CR>gv=gv
 nnoremap <A-Up> ddkP
 nnoremap <A-Down> ddp
 
+nnoremap <Esc> :noh<Esc>
+
 " " Destroy arrow keys in insert mode
 " inoremap <Up> <ESC><Up>
 " inoremap <Down> <ESC><Down>
@@ -220,9 +223,11 @@ vnoremap <Leader>P "+P
 nnoremap Y y$
 nnoremap s "_d
 
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left><Left>
-nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
-vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\')<CR>'<CR>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//I<Left><Left>
+vnoremap <Leader>s "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
+nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
+vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:set hlsearch<CR>
+nnoremap <Leader>vim :vim // **<Left><Left><Left><Left>
 
 " get out of insert mode
 inoremap <C-c> <ESC>
@@ -328,7 +333,7 @@ augroup mm_buf_cmds
 		autocmd InsertLeave * set colorcolumn=""
 	endif
 
-	autocmd CursorMoved * if (expand('<cWORD>') =~ @/) | set hlsearch | else | set nohlsearch | endif
+	" autocmd CursorMoved * if (expand('<cWORD>') =~ @/) | set hlsearch | else | set nohlsearch | endif
 
 	" automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
 	autocmd FileType netrw setl bufhidden=delete

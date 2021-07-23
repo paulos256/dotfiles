@@ -78,6 +78,9 @@ if executable('rg')
 	let g:rg_derive_root='true'
 endif
 
+" All baseline remaps and abbrevs and sets
+source ~/.vimrc
+
 " Select and use first in coc autocomplete list
 inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
 			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -88,8 +91,5 @@ nnoremap <C-p> :GFiles<CR>
 nmap <leader>gs :G<CR>
 
 " n is always forward, N is always back
-nnoremap <expr> k 'Kk'[v:searchforward]
-nnoremap <expr> K 'kK'[v:searchforward]
-
-" All baseline remaps and abbrevs and sets
-source ~/.vimrc
+nnoremap <expr> k 'Nn'[v:searchforward]
+nnoremap <expr> K 'nN'[v:searchforward]
