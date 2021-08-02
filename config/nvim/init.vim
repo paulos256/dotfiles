@@ -90,6 +90,16 @@ nnoremap <C-p> :GFiles<CR>
 
 nmap <leader>gs :G<CR>
 
+" put these in here to keep them out of VsVim
+set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap
+nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
+vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:set hlsearch<CR>
+
+" show search results in a different buffer
+command! -nargs=? Filter let @z='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! z
+" nnoremap <silent> <F3> :Filter()<CR>
+nnoremap <silent> <F3> qzq:g//y Z<CR>:new<CR>:put! z<CR>
+
 " n is always forward, N is always back
-nnoremap <expr> k 'Nn'[v:searchforward]
-nnoremap <expr> K 'nN'[v:searchforward]
+nnoremap <expr> k 'Nn'[v:searchforward].'zzzv'
+nnoremap <expr> K 'nN'[v:searchforward].'zzzv'

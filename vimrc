@@ -21,7 +21,7 @@ set nostartofline
 
 set nu
 set relativenumber
-set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap
+set nohlsearch
 
 set noswapfile
 set nobackup
@@ -78,7 +78,6 @@ autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
 " These are things that I mistype and want ignored.
 nnoremap Q  <silent>
-nnoremap q: <silent>
 
 " Buffers
 nnoremap <Leader>b :ls<CR>:b
@@ -92,23 +91,23 @@ noremap , ;
 noremap gh g;
 noremap g, g,
 " home row movement
-noremap m h
 noremap n gj
 noremap e gk
 onoremap n j
 onoremap e k
+noremap m h
 noremap i l
 " bottom (H M L)
 noremap E L
 " end of word
 noremap j e
-" combine lines
-noremap N J
+" combine lines (stay centered)
+noremap N mzJ`z
 " next/prev match
-noremap k n
-noremap K N
-noremap gk gn
-noremap gK gN
+noremap k nzzzv
+noremap K Nzzzv
+noremap gk gnzzzv
+noremap gK gNzzzv
 " new line
 noremap l o
 noremap L O
@@ -118,6 +117,10 @@ noremap O I
 " mark
 noremap ; m
 
+nnoremap <Leader>m :wincmd h<CR>
+nnoremap <Leader>n :wincmd j<CR>
+nnoremap <Leader>e :wincmd k<CR>
+nnoremap <Leader>i :wincmd l<CR>
 nnoremap <Leader><Left> :wincmd h<CR>
 nnoremap <Leader><Down> :wincmd j<CR>
 nnoremap <Leader><Up> :wincmd k<CR>
@@ -132,16 +135,16 @@ nnoremap <C-S-I> :bn<CR>
 noremap <C-Up> <C-e>
 noremap <C-Down> <C-y>
 
-nnoremap <A-n> :cnext<CR>
-nnoremap <A-e> :cprev<CR>
-nnoremap <Leader>' :call ToggleQFList(1)<CR>
-nnoremap <Leader>" :call ToggleQFList(0)<CR>
+nnoremap <A-n> :cnext<CR>zzzv
+nnoremap <A-e> :cprev<CR>zzzv
+nnoremap <Leader>" :call ToggleQFList(1)<CR>
+nnoremap <Leader>' :call ToggleQFList(0)<CR>
 
 " Move up or down a line at a time
 vnoremap <A-Up> :m '>+1<CR>gv=gv
 vnoremap <A-Down> :m '<-2<CR>gv=gv
-nnoremap <A-Up> ddkP
-nnoremap <A-Down> ddp
+nnoremap <A-Up> :m .-2<CR>==
+nnoremap <A-Down> :m .+1<CR>==
 
 nnoremap <Esc> :noh<Esc>
 
@@ -222,16 +225,13 @@ vnoremap <Leader>P "+P
 
 nnoremap Y y$
 nnoremap s "_d
+nnoremap S "_D
 
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//I<Left><Left>
 vnoremap <Leader>s "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
-nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
-vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:set hlsearch<CR>
-nnoremap <Leader>vim :vim // **<Left><Left><Left><Left>
-
-" get out of insert mode
-inoremap <C-c> <ESC>
-" inoremap en <ESC>
+nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
+vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>
+nnoremap <Leader>vim :lvim // **<Left><Left><Left><Left>
 
 " Toggle spelling hints
 nnoremap <Leader>ts :set spell!<CR>
@@ -242,6 +242,14 @@ iabbrev adn and
 iabbrev wehn when
 iabbrev tehn then
 iabbrev Pual Paul
+
+" Undo-queue breaks
+inoremap ! !<C-G>u
+inoremap . .<C-G>u
+inoremap , ,<C-G>u
+inoremap ; ;<C-G>u
+inoremap ) )<C-G>u
+inoremap } }<C-G>u
 
 fun! EditInitVim()
 	:tabnew $MYVIMRC
@@ -355,7 +363,7 @@ augroup THE_PRIMEAGEN
 	autocmd!
 	autocmd BufWritePre * :call TrimWhitespace()
 augroup END
-"
+
 augroup vimrc_filetypes
 	autocmd!
 
