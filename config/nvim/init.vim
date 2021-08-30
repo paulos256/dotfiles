@@ -101,5 +101,7 @@ command! -nargs=? Filter let @z='' | execute 'g/<args>/y A' | new | setlocal bt=
 nnoremap <silent> <F3> qzq:g//y Z<CR>:new<CR>:put! z<CR>
 
 " n is always forward, N is always back
-nnoremap <expr> k 'Nn'[v:searchforward].'zzzv'
-nnoremap <expr> K 'nN'[v:searchforward].'zzzv'
+noremap <expr> k 'Nn'[v:searchforward].'zzzv'
+noremap <expr> K 'nN'[v:searchforward].'zzzv'
+onoremap <expr> k 'Nn'[v:searchforward]
+onoremap <expr> K 'nN'[v:searchforward]

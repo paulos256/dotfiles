@@ -104,10 +104,14 @@ noremap j e
 " combine lines (stay centered)
 noremap N mzJ`z
 " next/prev match
-noremap k nzzzv
-noremap K Nzzzv
-noremap gk gnzzzv
-noremap gK gNzzzv
+noremap k n
+noremap K N
+onoremap k n
+onoremap K N
+noremap gk gn
+noremap gK gN
+onoremap gk gn
+onoremap gK gN
 " new line
 noremap l o
 noremap L O
@@ -135,10 +139,12 @@ nnoremap <C-S-I> :bn<CR>
 noremap <C-Up> <C-e>
 noremap <C-Down> <C-y>
 
-nnoremap <A-n> :cnext<CR>zzzv
-nnoremap <A-e> :cprev<CR>zzzv
-nnoremap <Leader>" :call ToggleQFList(1)<CR>
-nnoremap <Leader>' :call ToggleQFList(0)<CR>
+nnoremap <A-S-n> :lnext<CR>
+nnoremap <A-S-e> :lprev<CR>
+nnoremap <A-n> :cnext<CR>
+nnoremap <A-e> :cprev<CR>
+nnoremap <Leader>" :call ToggleQFList(0)<CR>
+nnoremap <Leader>' :call ToggleQFList(1)<CR>
 
 " Move up or down a line at a time
 vnoremap <A-Up> :m '>+1<CR>gv=gv
@@ -146,7 +152,7 @@ vnoremap <A-Down> :m '<-2<CR>gv=gv
 nnoremap <A-Up> :m .-2<CR>==
 nnoremap <A-Down> :m .+1<CR>==
 
-nnoremap <Esc> :noh<Esc>
+nnoremap <silent> <Esc> :noh<Esc>
 
 " " Destroy arrow keys in insert mode
 " inoremap <Up> <ESC><Up>
@@ -231,7 +237,7 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>//I<Left><Left>
 vnoremap <Leader>s "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
 nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
 vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>
-nnoremap <Leader>vim :lvim // **<Left><Left><Left><Left>
+nnoremap <Leader>vim :vim // **<Left><Left><Left><Left>
 
 " Toggle spelling hints
 nnoremap <Leader>ts :set spell!<CR>
@@ -243,13 +249,13 @@ iabbrev wehn when
 iabbrev tehn then
 iabbrev Pual Paul
 
-" Undo-queue breaks
-inoremap ! !<C-G>u
-inoremap . .<C-G>u
-inoremap , ,<C-G>u
-inoremap ; ;<C-G>u
-inoremap ) )<C-G>u
-inoremap } }<C-G>u
+" " Undo-queue breaks
+" inoremap ! !<C-G>u
+" inoremap . .<C-G>u
+" inoremap , ,<C-G>u
+" inoremap ; ;<C-G>u
+" inoremap ) )<C-G>u
+" inoremap } }<C-G>u
 
 fun! EditInitVim()
 	:tabnew $MYVIMRC
