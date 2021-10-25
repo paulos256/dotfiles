@@ -1,3 +1,5 @@
 [user]
 	name = Paulos256
 	email = jimmyq139@yahoo.com
+[core]
+	editor = nvim
