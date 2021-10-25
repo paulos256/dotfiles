@@ -1,3 +1,18 @@
+" hello front end masters
+set path+=**
+
+" Nice menu when typing `:find *.py`
+set wildmode=longest,list,full
+set wildmenu
+" Ignore files
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
+
 set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
 "  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
 set hidden  " allow dirty background buffers
@@ -199,11 +214,10 @@ let g:netrw_liststyle = 1
 let g:netrw_browse_split = 3
 let g:netrw_winsize = 25
 
-" Help and windows and Sex!
+" Help and windows
 nnoremap <leader>dir :Sex!<CR>
 nnoremap <Leader>cd :cd %:p:h<CR>
-nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>srw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader><CR> :so $MYVIMRC<CR>
@@ -229,7 +243,7 @@ nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-nnoremap Y y$
+nnoremap Y yg$
 nnoremap s "_d
 nnoremap S "_D
 
@@ -329,14 +343,8 @@ command! W w
 
 augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 60})
 augroup END
-
-" fun! SearchForWord()
-" 	call setreg("/", expand("<cword>"))
-" 	set hlsearch
-" endfun
-" nnoremap // :call SearchForWord()<CR>
 
 augroup mm_buf_cmds
 	autocmd!

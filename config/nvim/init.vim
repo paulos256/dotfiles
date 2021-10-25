@@ -4,32 +4,77 @@ if has('win32') || has('win64')
   let g:config_home = '~/AppData/Local/nvim'
 else
   let g:config_home = '~/.config/nvim'
+  nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
 endif
+
 call plug#begin(g:config_home . '/plugged')
 
-" Yes, I am a sneaky snek now
-Plug 'ambv/black'
-
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'dense-analysis/ale' " javascript async linter
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+" Before LSP
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" Plug 'dense-analysis/ale' " javascript async linter
+" Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'tweekmonster/gofmt.vim'
-Plug 'ap/vim-css-color'
 " Plug 'ledger/vim-ledger'
 " Plug 'mileszs/ack.vim'
-" Plug 'scrooloose/nerdtree'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
+" LSP plugins
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+" lspsaga: I think this exposes lsp functions?
+Plug 'glepnir/lspsaga.nvim'
+" symbols-outline: file outline using LSP
+Plug 'simrat39/symbols-outline.nvim'
+" Snippets
+Plug 'mattn/emmet-vim'
+" Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+
+" Debugger Plugins
+Plug 'mfussenegger/nvim-dap'
+Plug 'Pocco81/DAPInstall.nvim'
+Plug 'szw/vim-maximizer'
+
+" Formatters
+Plug 'rust-lang/rust.vim'
+Plug 'darrikonn/vim-gofmt'
+Plug 'tpope/vim-projectionist'
+Plug 'tomlion/vim-solidity'
+Plug 'ap/vim-css-color'
+" ambv/black: python formatter
+Plug 'ambv/black'
+
+" Neovim Tree sitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+" popup: Expose popup behavior for other plugins
 Plug 'nvim-lua/popup.nvim'
+" plenary: Expose common lua functions for other plugins
 Plug 'nvim-lua/plenary.nvim'
+"  ThePrimeagen/harpoon
+Plug 'ThePrimeagen/harpoon'
+" telescope: fzf replacement
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
+" vim-fugitive: Git from within vim
 Plug 'tpope/vim-fugitive'
+" gv: git tree view visualizer
+Plug 'junegunn/gv.vim'
+" " vim-rhubarb: github navigation
+" Plug 'tpope/vim-rhubarb'
+
+" vim-endwise: additional movement targets
+Plug 'tpope/vim-endwise'
+" vim-eunuch: UNIX commands from vim
+Plug 'tpope/vim-eunuch'
 	" gc, gcc, etc.  autocmd FileType apache setlocal commentstring=#\ %s
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -38,15 +83,10 @@ Plug 'tpope/vim-repeat'
 	" yss<p id="machine"> surrounds the line with the p tag
 	" yss{ surrounds line with {}
 Plug 'tpope/vim-surround'
-
-" Plug 'vim-utils/vim-man'
-Plug 'vim-scripts/openvpn'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
+Plug 'vim-scripts/openvpn'
 Plug 'theprimeagen/vim-be-good'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
@@ -61,10 +101,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+" lualine: status line
 Plug 'hoob3rt/lualine.nvim'
-
-" Cheat Sheet
-" Plug 'dbeniamine/cheat.sh-vim'
 
 call plug#end()
 
@@ -80,6 +118,14 @@ endif
 
 " All baseline remaps and abbrevs and sets
 source ~/.vimrc
+
+" Lua snip stuff
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
 " Select and use first in coc autocomplete list
 inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
