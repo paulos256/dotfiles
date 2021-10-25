@@ -235,8 +235,8 @@ nnoremap S "_D
 
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//I<Left><Left>
 vnoremap <Leader>s "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
-nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>
-vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>
+nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:let @"=@0<CR>
+vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>
 nnoremap <Leader>vim :vim // **<Left><Left><Left><Left>
 
 " Toggle spelling hints
@@ -365,10 +365,10 @@ let g:NERDTreeStatusLine = -1
 " Tell ack.vim to use ripgrep instead
 let g:ackprg = 'rg --vimgrep --no-heading'
 
-augroup THE_PRIMEAGEN
-	autocmd!
-	autocmd BufWritePre * :call TrimWhitespace()
-augroup END
+" augroup THE_PRIMEAGEN
+" 	autocmd!
+" 	autocmd BufWritePre * :call TrimWhitespace()
+" augroup END
 
 augroup vimrc_filetypes
 	autocmd!
