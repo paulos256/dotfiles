@@ -2,6 +2,7 @@ set exrc " Wont open project .nvimrc without this here
 
 if has('win32') || has('win64')
   let g:config_home = '~/AppData/Local/nvim'
+  nnoremap <silent> <C-f> <Nop>
 else
   let g:config_home = '~/.config/nvim'
   nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>

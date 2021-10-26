@@ -91,9 +91,6 @@ nnoremap <Leader>z z=1<CR><CR>
 autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
-" These are things that I mistype and want ignored.
-nnoremap Q  <silent>
-
 " Buffers
 nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>B :ls!<CR>:b
@@ -182,8 +179,9 @@ vnoremap <C-Right> >gv
 vnoremap < <gv
 vnoremap > >gv
 
-" got sick of accidentally hitting this
+" got sick of accidentally hitting these
 nnoremap U <Nop>
+nnoremap <silent> Q <Nop>
 
 let g:the_primeagen_qf_g = 0
 let g:the_primeagen_qf_l = 0
@@ -220,7 +218,7 @@ nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader><CR> :so $MYVIMRC<CR>
+nnoremap <Leader><CR> :so $MYVIMRC<CR>:call ColorMyPencils()<CR>
 
 nnoremap <Leader>- :vertical resize +5<CR>
 nnoremap <Leader>_ :vertical resize -5<CR>
@@ -373,10 +371,10 @@ let g:NERDTreeStatusLine = -1
 " Tell ack.vim to use ripgrep instead
 let g:ackprg = 'rg --vimgrep --no-heading'
 
-" augroup THE_PRIMEAGEN
-" 	autocmd!
-" 	autocmd BufWritePre * :call TrimWhitespace()
-" augroup END
+augroup THE_PRIMEAGEN
+	autocmd!
+    autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+augroup END
 
 augroup vimrc_filetypes
 	autocmd!
