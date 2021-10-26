@@ -62,8 +62,9 @@ Plug 'ThePrimeagen/harpoon'
 " telescope: fzf replacement
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
+" ripgrep: Rust implementation of grep
+Plug 'BurntSushi/ripgrep'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " vim-fugitive: Git from within vim
 Plug 'tpope/vim-fugitive'
