@@ -142,7 +142,7 @@ nnoremap <Leader>QQ :q!<CR>
 nnoremap <Leader>wt :wincmd T<CR>
 
 " Buffers
-nnoremap <Leader>b :ls<CR>:b
+" nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>B :ls!<CR>:b
 
 nnoremap <C-S-m> :bp<CR>
