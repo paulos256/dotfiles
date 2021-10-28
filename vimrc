@@ -91,11 +91,6 @@ nnoremap <Leader>z z=1<CR><CR>
 autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
-" Buffers
-nnoremap <Leader>b :ls<CR>:b
-nnoremap <Leader>B :ls!<CR>:b
-nnoremap <Leader>Q :bd<CR>
-
 " Colemak Navigation
 " f-back and forward
 noremap h ,
@@ -133,6 +128,7 @@ noremap O I
 " mark
 noremap ; m
 
+" Windows
 nnoremap <Leader>m :wincmd h<CR>
 nnoremap <Leader>n :wincmd j<CR>
 nnoremap <Leader>e :wincmd k<CR>
@@ -141,11 +137,16 @@ nnoremap <Leader><Left> :wincmd h<CR>
 nnoremap <Leader><Down> :wincmd j<CR>
 nnoremap <Leader><Up> :wincmd k<CR>
 nnoremap <Leader><Right> :wincmd l<CR>
-nnoremap <Leader>q :wincmd c<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>QQ :q!<CR>
 nnoremap <Leader>wt :wincmd T<CR>
 
-nnoremap <C-S-M> :bp<CR>
-nnoremap <C-S-I> :bn<CR>
+" Buffers
+nnoremap <Leader>b :ls<CR>:b
+nnoremap <Leader>B :ls!<CR>:b
+
+nnoremap <C-S-m> :bp<CR>
+nnoremap <C-S-i> :bn<CR>
 
 " Scroll the whole page up or down one line
 noremap <C-Up> <C-e>
