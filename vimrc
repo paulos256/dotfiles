@@ -78,12 +78,6 @@ let maplocalleader = " "
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
 
-" You don't know what you're missing if you don't use this.
-" nnoremap <C-e> :e#<CR>
-
-" Search for the word under the cursor in the current directory
-nnoremap <M-k>    mo:Ack! "\b<cword>\b" <CR>
-
 " Quickly fix spelling errors choosing the first result
 nnoremap <Leader>z z=1<CR><CR>
 
@@ -127,6 +121,8 @@ noremap o i
 noremap O I
 " mark
 noremap ; m
+
+inoremap <C-BS> <C-w>
 
 " Windows
 nnoremap <Leader>m :wincmd h<CR>
@@ -242,7 +238,7 @@ nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-nnoremap Y yg$
+nnoremap Y y$
 nnoremap s "_d
 nnoremap S "_D
 
@@ -275,24 +271,24 @@ fun! EditInitVim()
 	:new ~/.vimrc
 endfunction
 
-fun! EmptyRegisters()
+fun! ClearRegisters()
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
     for r in regs
         call setreg(r, [])
     endfor
 endfun
 
-" Stay on the same line when window switching
-fun! KeepCurrentLine(motion)
-  let theLine = line('.')
-  let theCol = col('.')
-  exec 'wincmd ' . a:motion
-  if &diff
-    call cursor(theLine, theCol)
-  endif
-endfunction
-nnoremap <C-w>m :silent call KeepCurrentLine('h')<CR>
-nnoremap <C-w>i :silent call KeepCurrentLine('l')<CR>
+" " Stay on the same line when window switching
+" fun! KeepCurrentLine(motion)
+"   let theLine = line('.')
+"   let theCol = col('.')
+"   exec 'wincmd ' . a:motion
+"   if &diff
+"     call cursor(theLine, theCol)
+"   endif
+" endfunction
+" nnoremap <C-w>m :silent call KeepCurrentLine('m')<CR>
+" nnoremap <C-w>i :silent call KeepCurrentLine('l')<CR>
 
 " Commands to send common keystrokes using tmux
 let g:tmux_console_pane = '0:0.0'

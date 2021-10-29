@@ -129,12 +129,11 @@ snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
-" Select and use first in coc autocomplete list
-inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
-			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-nmap gd <Plug>(coc-definition)
-nmap gr <Plug>(coc-references)
-nnoremap <C-p> :GFiles<CR>
+" " Select and use first in coc autocomplete list
+" inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
+" 			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+command! EditInitVim call EditInitVim()
 
 nmap <leader>gs :G<CR>
 
@@ -144,9 +143,9 @@ nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
 vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:set hlsearch<CR>
 
 " show search results in a different buffer
-command! -nargs=? Filter let @z='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! z
-" nnoremap <silent> <F3> :Filter()<CR>
+command! -nargs=? Filter let @z='' | execute 'g/<args>/y Z' | new | setlocal bt=nofile | put! z
 nnoremap <silent> <F3> qzq:g//y Z<CR>:new<CR>:put! z<CR>
+let g:maximizer_default_mapping_key = '<F12>'
 
 " n is always forward, N is always back
 noremap <expr> k 'Nn'[v:searchforward].'zzzv'
