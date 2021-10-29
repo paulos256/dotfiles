@@ -139,8 +139,8 @@ nmap <leader>gs :G<CR>
 
 " put these in here to keep them out of VsVim
 set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap
-nnoremap <Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
-vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:set hlsearch<CR>
+nnoremap <silent><Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:let @"=@0<CR>:set hlsearch<CR>
+vnoremap <silent><Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>:set hlsearch<CR>
 
 " show search results in a different buffer
 command! -nargs=? Filter let @z='' | execute 'g/<args>/y Z' | new | setlocal bt=nofile | put! z
