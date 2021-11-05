@@ -126,13 +126,13 @@ endif
 " All baseline remaps and abbrevs and sets
 source ~/.vimrc
 
-" Lua snip stuff
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
-snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
-snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
-imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+" " Lua snip stuff
+" imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+" inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+" snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+" snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+" imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+" smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
 " " Select and use first in coc autocomplete list
 " inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()

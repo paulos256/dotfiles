@@ -5,7 +5,7 @@
 " This just means I can crush, with opposite hand, the 4 terminal positions
 "
 " These functions are stored in harpoon.  A plugn that I am developing
-nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <Leader><C-a> :lua require("harpoon.mark").add_file()<CR>
 nnoremap <C-S-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <C-S-y> :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
 

@@ -137,12 +137,16 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>QQ :q!<CR>
 nnoremap <Leader>wt :wincmd T<CR>
 
+" Tabs
+nnoremap <C-Tab> gt
+nnoremap <C-S-Tab> gT
+
 " Buffers
 " nnoremap <Leader>b :ls<CR>:b
 nnoremap <Leader>B :ls!<CR>:b
 
-nnoremap <C-S-m> :bp<CR>
-nnoremap <C-S-i> :bn<CR>
+nnoremap <C-S-M> :bp<CR>
+nnoremap <C-S-I> :bn<CR>
 
 " Scroll the whole page up or down one line
 noremap <C-Up> <C-e>
@@ -179,6 +183,8 @@ vnoremap > >gv
 " got sick of accidentally hitting these
 nnoremap U <Nop>
 nnoremap <silent> Q <Nop>
+nnoremap <S-r> <nop>
+" nnoremap <C-p> <nop>
 
 let g:the_primeagen_qf_g = 0
 let g:the_primeagen_qf_l = 0
@@ -213,7 +219,7 @@ let g:netrw_winsize = 25
 nnoremap <leader>dir :Sex!<CR>
 nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
+" nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader><CR> :so $MYVIMRC<CR>:call ColorMyPencils()<CR>
 
@@ -222,9 +228,6 @@ nnoremap <Leader>_ :vertical resize -5<CR>
 nnoremap <Leader>= :resize +2<CR>
 nnoremap <Leader>+ :resize -2<CR>
 nnoremap <Leader>rp :resize 100<CR>
-
-nnoremap <S-r> <nop>
-" nnoremap <C-p> <nop>
 
 " greatest remap ever
 vnoremap p "_dP
