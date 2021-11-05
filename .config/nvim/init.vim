@@ -66,6 +66,11 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'BurntSushi/ripgrep'
 Plug 'kyazdani42/nvim-web-devicons'
 
+" firenvim: nvim in browser
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+au BufEnter github.com_*.txt set filetype=markdown
+au BufEnter trello.com_*.txt set filetype=markdown
+
 " vim-fugitive: Git from within vim
 Plug 'tpope/vim-fugitive'
 " gv: git tree view visualizer
