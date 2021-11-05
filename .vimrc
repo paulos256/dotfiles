@@ -244,6 +244,8 @@ vnoremap <Leader>P "+P
 nnoremap Y y$
 nnoremap s "_d
 nnoremap S "_D
+nnoremap x "_x
+nnoremap X "_X
 
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//I<Left><Left>
 vnoremap <Leader>s "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
