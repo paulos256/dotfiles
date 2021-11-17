@@ -4,7 +4,7 @@ set completeopt=menu,menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 fun! LspLocationList()
-    " lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
+    lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
 endfun
 
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
@@ -28,7 +28,8 @@ let g:compe.enabled = v:true
 let g:compe.autocomplete = v:true
 let g:compe.debug = v:false
 let g:compe.min_length = 1
-let g:compe.preselect = 'enable'
+" let g:compe.preselect = 'enable'
+let g:compe.preselect = 'disable'
 let g:compe.throttle_time = 80
 let g:compe.source_timeout = 200
 let g:compe.incomplete_delay = 400

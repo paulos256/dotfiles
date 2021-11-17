@@ -1,15 +1,11 @@
 lua require("theprimeagen")
 
-nnoremap <leader>rr :lua require('theprimeagen.telescope').refactors()<CR>
-vnoremap <leader>rr :lua require('theprimeagen.telescope').refactors()<CR>
-nnoremap <leader>grep :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-vnoremap <leader>grep :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-" nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <leader>rg :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
+nnoremap <leader>RG :lua require('telescope.builtin').live_grep()<CR>
+vnoremap <leader>rg :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 
 nnoremap <leader>b :tab :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>tab :tab lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>vrc :lua require('theprimeagen.telescope').search_dotfiles()<CR>
-nnoremap <leader>gc :lua require('theprimeagen.telescope').git_branches()<CR>
-nnoremap <leader>td :lua require('theprimeagen.telescope').dev()<CR>

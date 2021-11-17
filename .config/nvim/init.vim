@@ -140,7 +140,7 @@ source ~/.vimrc
 
 command! EditInitVim call EditInitVim()
 
-nmap <leader>gs :G<CR>
+cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
 
 " put these in here to keep them out of VsVim
 set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap

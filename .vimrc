@@ -58,6 +58,10 @@ set signcolumn=yes
 set isfname+=@-@
 set encoding=utf8           " UTF-8 by default
 
+" Autocomplete stuff
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
 set foldcolumn=1
 set cmdheight=1
 
@@ -216,7 +220,8 @@ let g:netrw_browse_split = 3
 let g:netrw_winsize = 25
 
 " Help and windows
-nnoremap <leader>dir :Sex!<CR>
+" nnoremap <leader>dir :Sex!<CR>
+nnoremap <leader>dir :Telescope file_browser<CR>
 nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
 " nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
