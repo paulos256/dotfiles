@@ -30,15 +30,15 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'glepnir/lspsaga.nvim'
 " symbols-outline: file outline using LSP
 Plug 'simrat39/symbols-outline.nvim'
-" Snippets
-Plug 'mattn/emmet-vim'
+" " Snippets
+" Plug 'mattn/emmet-vim'
 " Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
+" Plug 'rafamadriz/friendly-snippets'
 
-" Debugger Plugins
-Plug 'mfussenegger/nvim-dap'
-Plug 'Pocco81/DAPInstall.nvim'
-Plug 'szw/vim-maximizer'
+" " Debugger Plugins
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'Pocco81/DAPInstall.nvim'
+" Plug 'szw/vim-maximizer'
 
 " Formatters
 Plug 'rust-lang/rust.vim'

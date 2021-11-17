@@ -1,5 +1,4 @@
 require("theprimeagen.telescope")
-require("theprimeagen.debugger")
 require("theprimeagen.harpoon")
 require("theprimeagen.lsp")
 
