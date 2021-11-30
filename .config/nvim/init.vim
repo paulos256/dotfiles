@@ -152,8 +152,16 @@ command! -nargs=? Filter let @z='' | execute 'g/<args>/y Z' | new | setlocal bt=
 nnoremap <silent> <F3> qzq:g//y Z<CR>:new<CR>:put! z<CR>
 let g:maximizer_default_mapping_key = '<F12>'
 
-" n is always forward, N is always back
-noremap <expr> k 'Nn'[v:searchforward].'zzzv'
-noremap <expr> K 'nN'[v:searchforward].'zzzv'
-onoremap <expr> k 'Nn'[v:searchforward]
-onoremap <expr> K 'nN'[v:searchforward]
+if g:using_colemak
+	" k is always forward, K is always back
+	noremap <expr> k 'Nn'[v:searchforward].'zzzv'
+	noremap <expr> K 'nN'[v:searchforward].'zzzv'
+	onoremap <expr> k 'Nn'[v:searchforward]
+	onoremap <expr> N 'nN'[v:searchforward]
+else
+	" n is always forward, N is always back
+	noremap <expr> n 'Nn'[v:searchforward].'zzzv'
+	noremap <expr> N 'nN'[v:searchforward].'zzzv'
+	onoremap <expr> n 'Nn'[v:searchforward]
+	onoremap <expr> N 'nN'[v:searchforward]
+endif

@@ -90,49 +90,56 @@ autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
 " Colemak Navigation
-" f-back and forward
-noremap h ,
-noremap , ;
-noremap gh g;
-noremap g, g,
-" home row movement
-noremap n gj
-noremap e gk
-onoremap n j
-onoremap e k
-noremap m h
-noremap i l
-" bottom (H M L)
-noremap E L
-" end of word
-noremap j e
-" combine lines (stay centered)
-noremap N mzJ`z
-" next/prev match
-noremap k n
-noremap K N
-onoremap k n
-onoremap K N
-noremap gk gn
-noremap gK gN
-onoremap gk gn
-onoremap gK gN
-" new line
-noremap l o
-noremap L O
-" insert
-noremap o i
-noremap O I
-" mark
-noremap ; m
+let g:using_colemak=0
+if g:using_colemak
+	" f-back and forward
+	noremap h ,
+	noremap , ;
+	noremap gh g;
+	noremap g, g,
+	" home row movement
+	noremap n gj
+	noremap e gk
+	noremap m h
+	noremap i l
+	" bottom (H M L)
+	noremap E L
+	" end of word
+	noremap j e
+	" combine lines (stay centered)
+	noremap N mzJ`z
+	" next/prev match
+	noremap k n
+	noremap K N
+	" onoremap k n
+	" onoremap K N
+	noremap gk gn
+	noremap gK gN
+	" new line
+	noremap l o
+	noremap L O
+	" insert
+	noremap o i
+	noremap O I
+	" mark
+	noremap ; m
+else
+	" yow, cow, dow, etc.
+	onoremap o i
+	vnoremap o i
+	" combine lines (stay centered)
+	noremap J mzJ`z
+endif
 
 inoremap <C-BS> <C-w>
 
 " Windows
-nnoremap <Leader>m :wincmd h<CR>
-nnoremap <Leader>n :wincmd j<CR>
-nnoremap <Leader>e :wincmd k<CR>
-nnoremap <Leader>i :wincmd l<CR>
+if g:using_colemak
+	nnoremap <Leader>m :wincmd h<CR>
+	nnoremap <Leader>n :wincmd j<CR>
+	nnoremap <Leader>e :wincmd k<CR>
+	nnoremap <Leader>i :wincmd l<CR>
+endif
 nnoremap <Leader><Left> :wincmd h<CR>
 nnoremap <Leader><Down> :wincmd j<CR>
 nnoremap <Leader><Up> :wincmd k<CR>
@@ -145,12 +152,8 @@ nnoremap <Leader>wt :wincmd T<CR>
 nnoremap <C-Tab> gt
 nnoremap <C-S-Tab> gT
 
-" Buffers
-" nnoremap <Leader>b :ls<CR>:b
-nnoremap <Leader>B :ls!<CR>:b
-
-nnoremap <C-S-M> :bp<CR>
-nnoremap <C-S-I> :bn<CR>
+nnoremap <C-S-Left> :bp<CR>
+nnoremap <C-S-Right> :bn<CR>
 
 " Scroll the whole page up or down one line
 noremap <C-Up> <C-e>
@@ -224,7 +227,6 @@ let g:netrw_winsize = 25
 nnoremap <leader>dir :Telescope file_browser<CR>
 nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
-" nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <Leader><CR> :so $MYVIMRC<CR>:call ColorMyPencils()<CR>
 
