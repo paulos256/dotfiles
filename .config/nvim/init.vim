@@ -165,3 +165,6 @@ else
 	onoremap <expr> n 'Nn'[v:searchforward]
 	onoremap <expr> N 'nN'[v:searchforward]
 endif
+
+nnoremap <Up> g<Up>
+nnoremap <Down> g<Down>

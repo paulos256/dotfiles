@@ -89,8 +89,7 @@ nnoremap <Leader>z z=1<CR><CR>
 autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
-" Colemak Navigation
-let g:using_colemak=0
+let g:using_colemak=1
 if g:using_colemak
 	" f-back and forward
 	noremap h ,
@@ -124,6 +123,13 @@ if g:using_colemak
 	" mark
 	noremap ; m
 else
+	noremap j gj
+	noremap k gk
+	" dn, Ve
+	onoremap n j
+	onoremap e k
+	vnoremap n j
+	vnoremap e k
 	" yow, cow, dow, etc.
 	onoremap o i
 	vnoremap o i
