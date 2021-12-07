@@ -10,17 +10,6 @@ endif
 
 call plug#begin(g:config_home . '/plugged')
 
-" Before LSP
-" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-" Plug 'dense-analysis/ale' " javascript async linter
-" Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-" Plug 'tweekmonster/gofmt.vim'
-" Plug 'ledger/vim-ledger'
-" Plug 'mileszs/ack.vim'
-" Plug 'sheerun/vim-polyglot'
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
 " LSP plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -40,14 +29,14 @@ Plug 'simrat39/symbols-outline.nvim'
 " Plug 'Pocco81/DAPInstall.nvim'
 " Plug 'szw/vim-maximizer'
 
-" Formatters
-Plug 'rust-lang/rust.vim'
-Plug 'darrikonn/vim-gofmt'
-Plug 'tpope/vim-projectionist'
-Plug 'tomlion/vim-solidity'
-Plug 'ap/vim-css-color'
-" ambv/black: python formatter
-Plug 'ambv/black'
+" " Formatters
+" Plug 'rust-lang/rust.vim'
+" Plug 'darrikonn/vim-gofmt'
+" Plug 'tpope/vim-projectionist'
+" Plug 'tomlion/vim-solidity'
+" Plug 'ap/vim-css-color'
+" " ambv/black: python formatter
+" Plug 'ambv/black'
 
 " Neovim Tree sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -93,20 +82,20 @@ Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 
-Plug 'vim-scripts/openvpn'
+" Plug 'vim-scripts/openvpn'
 Plug 'theprimeagen/vim-be-good'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
 
 Plug 'gruvbox-community/gruvbox'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'colepeters/spacemacs-theme.vim'
-Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
-Plug 'flazz/vim-colorschemes'
-Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'colepeters/spacemacs-theme.vim'
+" Plug 'sainnhe/gruvbox-material'
+" Plug 'phanviet/vim-monokai-pro'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'chriskempson/base16-vim'
+" Plug 'dracula/vim', { 'as': 'dracula' }
 
 " lualine: status line
 Plug 'hoob3rt/lualine.nvim'
