@@ -180,12 +180,6 @@ nnoremap <A-Down> :m .+1<CR>==
 
 nnoremap <silent> <Esc> :noh<Esc>
 
-" " Destroy arrow keys in insert mode
-" inoremap <Up> <ESC><Up>
-" inoremap <Down> <ESC><Down>
-" inoremap <Left> <ESC><Left>
-" inoremap <Right> <ESC><Right>
-
 nnoremap <C-Left> <<
 nnoremap <C-Right> >>
 vnoremap <C-Left> <gv

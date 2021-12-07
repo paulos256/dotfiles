@@ -157,3 +157,9 @@ endif
 
 nnoremap <Up> g<Up>
 nnoremap <Down> g<Down>
+
+" Destroy arrow keys in insert mode
+inoremap <Up> <ESC><Up>
+inoremap <Down> <ESC><Down>
+inoremap <Left> <ESC><Left>
+inoremap <Right> <ESC><Right>
