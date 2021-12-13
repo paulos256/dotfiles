@@ -8,6 +8,5 @@ mklink "%UP_PAUL%\.vimrc" "%DOT_FILES_DIR%\.vimrc"
 mklink /D "%APP_DATA%\Roaming\Vifm" "%DOT_FILES_DIR%\.config\vifm"
 
 mklink "%UP_PAUL%\.gitconfig" "%DOT_FILES_DIR%\.gitconfig"
-mklink "%UP_PAUL%\.kdiff3rc" "%DOT_FILES_DIR%\.kdiff3rc"
 
 pause
