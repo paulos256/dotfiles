@@ -136,6 +136,11 @@ set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap
 nnoremap <silent><Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:let @"=@0<CR>:set hlsearch<CR>
 vnoremap <silent><Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>:set hlsearch<CR>
 
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 60})
+augroup END
+
 " show search results in a different buffer
 command! -nargs=? Filter let @z='' | execute 'g/<args>/y Z' | new | setlocal bt=nofile | put! z
 nnoremap <silent> <F3> qzq:g//y Z<CR>:new<CR>:put! z<CR>

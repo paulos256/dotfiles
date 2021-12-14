@@ -348,11 +348,6 @@ endfunction
 " ES
 command! W w
 
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 60})
-augroup END
-
 augroup mm_buf_cmds
 	autocmd!
 	" Color Column (only on insert)
