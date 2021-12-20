@@ -15,7 +15,7 @@ set wildignore+=**/.git/*
 
 set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
 "  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
-set hidden  " allow dirty background buffers
+set nohidden  " DO NOT allow dirty background buffers
 set noerrorbells
 set notimeout
 set visualbell
@@ -122,6 +122,10 @@ if g:using_colemak
 	noremap O I
 	" mark
 	noremap ; m
+
+	" insert blank line
+	noremap <C-l> o<Esc>
+	noremap <C-S-L> O<Esc>
 else
 	noremap j gj
 	noremap k gk
@@ -135,6 +139,10 @@ else
 	vnoremap o i
 	" combine lines (stay centered)
 	noremap J mzJ`z
+
+	" insert blank line
+	noremap <C-o> o<Esc>
+	noremap <C-S-O> O<Esc>
 endif
 
 inoremap <C-BS> <C-w>
@@ -242,13 +250,16 @@ vnoremap p "_dP
 " next greatest remap ever : asbjornHaland
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
-nnoremap <Leader>Y gg"+yG
+nnoremap <Leader><C-y> gg"+yG
+nnoremap Y y$
+nnoremap <Leader>Y "+y$
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-nnoremap Y y$
+" don't need the line break at the end
+vnoremap $ $<Left>
 nnoremap s "_d
 nnoremap S "_D
 nnoremap x "_x
@@ -270,13 +281,14 @@ iabbrev wehn when
 iabbrev tehn then
 iabbrev Pual Paul
 
-" " Undo-queue breaks
+" Undo-queue breaks
 " inoremap ! !<C-G>u
 " inoremap . .<C-G>u
 " inoremap , ,<C-G>u
 " inoremap ; ;<C-G>u
 " inoremap ) )<C-G>u
 " inoremap } }<C-G>u
+inoremap <Enter> <Enter><C-G>u
 
 fun! EditInitVim()
 	:tabnew $MYVIMRC
