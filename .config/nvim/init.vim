@@ -15,14 +15,25 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-" lspsaga: I think this exposes lsp functions?
+"   lspsaga: I think this exposes lsp functions?
 Plug 'glepnir/lspsaga.nvim'
 " symbols-outline: file outline using LSP
 Plug 'simrat39/symbols-outline.nvim'
+"   rust-tools: ez testing, etc.?
+" Plug 'KarlWithK/rust-tools.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp'
+"   found these on a website: still unexamined
+" Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'onsails/lspkind-nvim'
+" Plug 'ray-x/lsp_signature.nvim'
+
 " " Snippets
 " Plug 'mattn/emmet-vim'
 " Plug 'L3MON4D3/LuaSnip'
 " Plug 'rafamadriz/friendly-snippets'
+" Plug 'SirVer/ultisnips'
 
 " " Debugger Plugins
 " Plug 'mfussenegger/nvim-dap'
@@ -108,6 +119,11 @@ colorscheme gruvbox
 let g:python_recommended_style = 0
 let g:vim_be_good_log_file = 1
 let g:vim_apm_log = 1
+
+" Enable deoplete autocompletion in Rust files
+let g:deoplete#enable_at_startup = 1
+" Customize deoplete
+call deoplete#custom#source('_', 'max_menu_width', 80)
 
 if executable('rg')
 	let g:rg_derive_root='true'

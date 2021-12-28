@@ -19,10 +19,12 @@ augroup FILETYPE_VIMSCRIPT
 	autocmd FileType vim setlocal commentstring=\"\ %s
 augroup END
 
-" augroup FILETYPE_RUST
-" 	autocmd!
-" 	autocmd! FileType rust :nnorem
-" augroup END
+augroup FILETYPE_RUST
+	autocmd!
+	autocmd! FileType rust :nnorem
+	autocmd! FileType rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
+	autocmd! FileType rust nnoremap <leader>cl :!cargo clippy
+augroup END
 
 
 
