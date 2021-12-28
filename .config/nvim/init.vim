@@ -59,6 +59,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 au BufEnter github.com_*.txt set filetype=markdown
 au BufEnter trello.com_*.txt set filetype=markdown
+au BufEnter bugs.carlsonengineeringinc.com_*.txt set filetype=markdown
 
 " vim-fugitive: Git from within vim
 Plug 'tpope/vim-fugitive'

@@ -433,6 +433,7 @@ augroup vimrc_filetypes
 	au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 	au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
 	au FileType markdown syn sync fromstart
+	au FileType markdown setlocal wrap
 	au Filetype gitcommit setlocal tw=80
 	au Filetype csv setlocal nocursorline
 
