@@ -99,6 +99,9 @@ if g:using_colemak
 	" home row movement
 	noremap n gj
 	noremap e gk
+	" dn, Ve
+	onoremap n j
+	onoremap e k
 	noremap m h
 	noremap i l
 	" bottom (H M L)
@@ -129,14 +132,8 @@ if g:using_colemak
 else
 	noremap j gj
 	noremap k gk
-	" dn, Ve
-	onoremap n j
-	onoremap e k
-	vnoremap n j
-	vnoremap e k
-	" yow, cow, dow, etc.
-	onoremap o i
-	vnoremap o i
+	vnoremap j j
+	vnoremap k k
 	" combine lines (stay centered)
 	noremap J mzJ`z
 

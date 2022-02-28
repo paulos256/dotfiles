@@ -146,7 +146,9 @@ source ~/.vimrc
 
 command! EditInitVim call EditInitVim()
 
-cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
+cmap <C-Up> <Plug>(TelescopeFuzzyCommandSearch)
+nnoremap <C-S> :w<CR>
+nnoremap <C-S-S> :wa<CR>
 
 " put these in here to keep them out of VsVim
 set hlsearch                     " Pair this with the <Esc> :noh<Esc> remap
