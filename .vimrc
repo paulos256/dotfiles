@@ -269,7 +269,7 @@ vnoremap <Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>
 nnoremap <Leader>vim :vim // **<Left><Left><Left><Left>
 
 " Toggle spelling hints
-nnoremap <Leader>ts :set spell!<CR>
+nnoremap <Leader>ts :setlocal spell!<CR>
 nnoremap <Leader>wrap :setlocal wrap!<CR>
 
 iabbrev teh the
@@ -403,7 +403,7 @@ augroup vimrc_filetypes
 	au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
 	au BufNewFile,BufRead *.lkml    setf yaml
 	au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
-	au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
+	au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin spell
 	au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
 	au BufNewFile,BufRead *.plist   setf xml
 	au BufNewFile,BufRead *.rb      setlocal noai
