@@ -81,8 +81,28 @@ require'lspconfig'.gopls.setup(config({
     },
 }))
 
--- who even uses this?
-require'lspconfig'.rust_analyzer.setup(config({}))
+local on_attach = function(client)
+    require'completion'.on_attach(client)
+end
+
+require'lspconfig'.rust_analyzer.setup({
+    on_attach=on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
+
 
 -- require'lspconfig'.sumneko_lua.setup(config({
 --     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};

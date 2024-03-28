@@ -57,6 +57,8 @@ Plug 'nvim-treesitter/playground'
 Plug 'nvim-lua/popup.nvim'
 " plenary: Expose common lua functions for other plugins
 Plug 'nvim-lua/plenary.nvim'
+" lsp_extensions: standard (?) extensions (like inlay hints for rust)
+Plug 'nvim-lua/lsp_extensions.nvim'
 "  ThePrimeagen/harpoon
 Plug 'ThePrimeagen/harpoon'
 " telescope: fzf replacement
@@ -69,7 +71,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 " firenvim: nvim in browser
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 au BufEnter github.com_*.txt set filetype=markdown
-au BufEnter trello.com_*.txt set filetype=markdown
+" au BufEnter trello.com_*.txt set filetype=markdown
 au BufEnter bugs.carlsonengineeringinc.com_*.txt set filetype=markdown
 
 " vim-fugitive: Git from within vim
@@ -93,6 +95,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
+Plug 'liuchengxu/vim-which-key'
+" Plug 'folke/which-key'
 
 " Plug 'vim-scripts/openvpn'
 Plug 'theprimeagen/vim-be-good'
@@ -120,9 +124,8 @@ let g:python_recommended_style = 0
 let g:vim_be_good_log_file = 1
 let g:vim_apm_log = 1
 
-" Enable deoplete autocompletion in Rust files
-let g:deoplete#enable_at_startup = 1
-" Customize deoplete
+" Deoplete autocompletion
+let g:deoplete#enable_at_startup = 0
 call deoplete#custom#source('_', 'max_menu_width', 80)
 
 if executable('rg')
@@ -144,7 +147,17 @@ source ~/.vimrc
 " inoremap <silent><expr> <C-space> pumvisible() ? coc#_select_confirm()
 " 			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+fun! EditInitVim()
+	:tabnew $MYVIMRC
+	:new ~/.vimrc
+endfunction
 command! EditInitVim call EditInitVim()
+
+fun! HighlightTestWindow()
+	:tabe
+	:so $VIMRUNTIME/syntax/hitest.vim
+endfunction
+command! HighlightTestWindow call HighlightTestWindow()
 
 cmap <C-Up> <Plug>(TelescopeFuzzyCommandSearch)
 nnoremap <C-S> :w<CR>
