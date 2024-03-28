@@ -17,13 +17,11 @@ set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
 "  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
 set nohidden  " DO NOT allow dirty background buffers
 set noerrorbells
-set notimeout
 set visualbell
 set nowrap
 set formatoptions+=1qjro
 
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=3 softtabstop=0 shiftwidth=0
 set shiftround                   " Shift to certain columns, not just n spaces
 set noexpandtab                  " Use tabs
 set autoindent smartindent
@@ -52,7 +50,6 @@ silent! set mouse=nvc       " Use the mouse, but not in insert mode
 set termguicolors
 set scrolloff=8
 set list
-set lazyredraw
 set listchars=tab:\|\ ,extends:~,precedes:\^,trail:-
 set signcolumn=yes
 set isfname+=@-@
@@ -76,8 +73,11 @@ set spelllang=en_us
 set colorcolumn=   " this is set to toggle with insert mode
 
 let loaded_matchparen = 1
-let mapleader = " "
-let maplocalleader = " "
+let g:mapleader = "\<Space>"
+let g:maplocalleader = "\<Space>"
+" nnoremap <leader> :WhichKey '<Space>'<CR>
+" nnoremap <localleader> :WhichKey '<Space>'<CR>
+set notimeout
 
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
@@ -89,7 +89,7 @@ nnoremap <Leader>z z=1<CR><CR>
 autocmd FileType qf setlocal number nolist
 autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 
-let g:using_colemak=1
+let g:using_colemak=0
 if g:using_colemak
 	" f-back and forward
 	noremap h ,
@@ -120,15 +120,11 @@ if g:using_colemak
 	" new line
 	noremap l o
 	noremap L O
-	" insert
+	" insert and 'inside' motion
 	noremap o i
 	noremap O I
 	" mark
 	noremap ; m
-
-	" insert blank line
-	noremap <C-l> o<Esc>
-	noremap <C-S-L> O<Esc>
 else
 	noremap j gj
 	noremap k gk
@@ -137,9 +133,14 @@ else
 	" combine lines (stay centered)
 	noremap J mzJ`z
 
-	" insert blank line
-	noremap <C-o> o<Esc>
-	noremap <C-S-O> O<Esc>
+	" more convenient 'inside' motion for yank
+	onoremap o i
+	onoremap O o
+	vnoremap o i
+	vnoremap O o
+
+	noremap E ge
+	noremap ge E
 endif
 
 inoremap <C-BS> <C-w>
@@ -150,13 +151,18 @@ if g:using_colemak
 	nnoremap <Leader>n :wincmd j<CR>
 	nnoremap <Leader>e :wincmd k<CR>
 	nnoremap <Leader>i :wincmd l<CR>
+else
+	nnoremap <Leader>h :wincmd h<CR>
+	nnoremap <Leader>j :wincmd j<CR>
+	nnoremap <Leader>k :wincmd k<CR>
+	nnoremap <Leader>l :wincmd l<CR>
 endif
 nnoremap <Leader><Left> :wincmd h<CR>
 nnoremap <Leader><Down> :wincmd j<CR>
 nnoremap <Leader><Up> :wincmd k<CR>
 nnoremap <Leader><Right> :wincmd l<CR>
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>QQ :q!<CR>
+nnoremap <Leader>QQQQ :q!<CR>
 nnoremap <Leader>wt :wincmd T<CR>
 
 " Tabs
@@ -178,10 +184,10 @@ nnoremap <Leader>" :call ToggleQFList(0)<CR>
 nnoremap <Leader>' :call ToggleQFList(1)<CR>
 
 " Move up or down a line at a time
-vnoremap <A-Up> :m '>+1<CR>gv=gv
-vnoremap <A-Down> :m '<-2<CR>gv=gv
-nnoremap <A-Up> :m .-2<CR>==
-nnoremap <A-Down> :m .+1<CR>==
+vnoremap <A-Up> :m '<-2<CR>gvgv
+vnoremap <A-Down> :m '>+1<CR>gvgv
+nnoremap <A-Up> :m .-2<CR>
+nnoremap <A-Down> :m .+1<CR>
 
 nnoremap <silent> <Esc> :noh<Esc>
 
@@ -233,7 +239,7 @@ nnoremap <leader>dir :Telescope file_browser<CR>
 nnoremap <Leader>cd :cd %:p:h<CR>
 nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader><CR> :so $MYVIMRC<CR>:call ColorMyPencils()<CR>
+nnoremap <silent> <Leader><CR> :so $MYVIMRC<CR>:call ColorMyPencils()<CR>
 
 nnoremap <Leader>- :vertical resize +5<CR>
 nnoremap <Leader>_ :vertical resize -5<CR>
@@ -286,11 +292,6 @@ iabbrev Pual Paul
 " inoremap ) )<C-G>u
 " inoremap } }<C-G>u
 inoremap <Enter> <Enter><C-G>u
-
-fun! EditInitVim()
-	:tabnew $MYVIMRC
-	:new ~/.vimrc
-endfunction
 
 fun! ClearRegisters()
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
@@ -349,8 +350,8 @@ endfunction
 
 " Custom mode for distraction-free editing
 function! ProseMode()
-  call goyo#execute(0, [])
-  set spell noci nosi noai nolist noshowmode noshowcmd
+  " call goto#execute(0, [])
+  set spell noci nosi noai nolist noshowmode noshowcmd wrap
   set complete+=s
 endfunction
 
@@ -358,7 +359,6 @@ endfunction
 command! W w
 
 augroup mm_buf_cmds
-	autocmd!
 	" Color Column (only on insert)
 	autocmd!
 	if exists ("&colorcolumn")
@@ -385,8 +385,8 @@ let g:NERDTreeStatusLine = -1
 let g:ackprg = 'rg --vimgrep --no-heading'
 
 augroup THE_PRIMEAGEN
+	autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 	autocmd!
-    autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
 augroup vimrc_filetypes
