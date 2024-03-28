@@ -35,9 +35,19 @@ require("telescope").load_extension("fzy_native")
 local M = {}
 M.search_dotfiles = function()
     require("telescope.builtin").find_files({
-        prompt_title = "< VimRC >",
+        prompt_title = "< Dotfiles >",
         cwd = vim.env.DOTFILES,
         hidden = true,
+    })
+end
+
+M.search_vim_config = function()
+    require("telescope.builtin").live_grep({
+        prompt_title = "< VimConfig >",
+        search_dirs = { vim.g.config_home },
+        grep_open_files = false,
+        -- cwd = vim.g.config_home,
+        -- hidden = true,
     })
 end
 
