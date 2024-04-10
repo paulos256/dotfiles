@@ -1,4 +1,2 @@
-.config/nvim/plugged/
-.config/nvim/plugged/**
-.config/nvim/.netrwhist
+.config/nvim/lazy-lock.json
 .config/vifm/vifminfo.json

@@ -1,7 +1,7 @@
 let s:fontsize = 9
 function! AdjustFontSize(amount)
   let s:fontsize = s:fontsize+a:amount
-  execute "GuiFont! Cascadia Code PL:h" . s:fontsize
+  set guifont=""Cascadia Code PL:h" . s:fontsize
 endfunction
 
 execute AdjustFontSize(0)
