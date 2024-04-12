@@ -133,6 +133,12 @@ inoremap <Down> <ESC><Down>
 inoremap <Left> <ESC><Left>
 inoremap <Right> <ESC><Right>
 
+" Temporarily disable arrow keys to get used to non-colemak
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+
 if g:colemak
 	" f-back and forward
 	noremap h ,
