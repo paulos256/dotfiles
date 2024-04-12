@@ -1,5 +1,5 @@
 -- This file is automatically loaded by lazyvim.config.init
-local Util = require("lazy.util")
+local Util = require("config.util.util")
 
 -- -- buffers
 -- vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
@@ -38,8 +38,6 @@ vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error"
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- stylua: ignore start
-
 -- toggle options
 -- vim.keymap.set("n", "<leader>uf", function() Util.format.toggle() end, { desc = "Toggle auto format (global)" })
 -- vim.keymap.set("n", "<leader>uF", function() Util.format.toggle(true) end, { desc = "Toggle auto format (buffer)" })
@@ -49,7 +47,9 @@ vim.keymap.set("n", "<leader>ud", function() Util.toggle.diagnostics() end, { de
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 vim.keymap.set("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  map( "n", "<leader>uh", function() Util.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+  vim.keymap.set("n", "<leader>uh", function() Util.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+else
+	vim.keymap.set("n", "<leader>uh", "<nop>")
 end
 vim.keymap.set("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
 -- highlights under cursor
