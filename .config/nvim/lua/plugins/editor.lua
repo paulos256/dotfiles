@@ -29,9 +29,7 @@ return {
         "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Switch Buffer",
       },
---      { "<leader>/", Telescope("live_grep"), desc = "Grep (root dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", Telescope("files"), desc = "Find Files (root dir)" },
       -- find
       { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", Telescope.config_files(), desc = "Find Config File" },
@@ -40,9 +38,6 @@ return {
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", Telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
-      -- -- git
-      -- { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-      -- { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
       -- search
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
@@ -201,7 +196,7 @@ return {
       plugins = { spelling = true },
       defaults = {
         mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
+        -- ["g"] = { name = "+goto" },
         ["gs"] = { name = "+surround" },
         ["z"] = { name = "+fold" },
         ["]"] = { name = "+next" },
@@ -210,7 +205,7 @@ return {
         ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
         ["<leader>f"] = { name = "+file/find" },
-        ["<leader>g"] = { name = "+git" },
+        -- ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },

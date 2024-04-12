@@ -62,6 +62,11 @@ set spelllang=en_us
 
 set colorcolumn=   " this is set to toggle with insert mode
 
+if !g:actual_neovim
+	let mapleader = " "
+	let maplocalleader = " "
+endif
+
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
 
@@ -78,12 +83,21 @@ inoremap <C-BS> <C-w>
 nnoremap x "_x
 nnoremap X "_X
 
+" Quick search
 nnoremap <silent><Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:let @"=@0<CR>:set hlsearch<CR>
-vnoremap <silent><Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>:set hlsearch<CR>
+if g:actual_neovim
+	vnoremap <silent><Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>:set hlsearch<CR>  " Escape slashes and square brackets
+else
+	vnoremap <Leader>/ "zy:let @/=@z<CR>:set hlsearch<CR>  " Take my chances with slashes and square brackets
+endif
 
-" Replace selection might be handled by spectre?
-nnoremap <Leader>sR :%s/\<<C-r><C-w>\>//I<Left><Left>
-vnoremap <Leader>sR "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
+" Quick replace
+nnoremap <silent><Leader>sr :%s/\<<C-r><C-w>\>//I<Left><Left>
+if g:actual_neovim
+	vnoremap <silent><Leader>sr "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>  " Escape slashes and square brackets
+else
+	vnoremap <Leader>sr "zy:let @/=@z:%s///I<Left><Left>  " Take my chances with slashes and square brackets
+endif
 
 " Tabs
 nnoremap <C-Tab> gt
@@ -107,9 +121,10 @@ inoremap ; ;<C-G>u
 " inoremap ) )<C-G>u
 " inoremap } }<C-G>u
 
-cnoremap cd. lcd %:p:h<CR>
+nnoremap <Leader>cd. <cmd>cd %:p:h<CR>
 
 noremap <C-s> <cmd>w<cr><esc>
+noremap <C-S-s> <cmd>wa<cr><esc>
 nnoremap <silent> <Esc> :noh<Esc>
 
 " Destroy arrow keys in insert mode
@@ -155,14 +170,6 @@ if g:colemak
 	noremap O I
 	" mark
 	noremap ; m
-
-	" n is always forward, N is always back
-	nnoremap <expr> k 'Nn'[v:searchforward].'zzzv'
-	onoremap <expr> k 'Nn'[v:searchforward]
-	xnoremap <expr> k 'Nn'[v:searchforward]
-	nnoremap <expr> K 'nN'[v:searchforward].'zzzv'
-	onoremap <expr> K 'nN'[v:searchforward]
-	xnoremap <expr> K 'nN'[v:searchforward]
 else
 	noremap j gj
 	noremap k gk
@@ -180,14 +187,6 @@ else
 
 	noremap E ge
 	noremap ge E
-
-	" n is always forward, N is always back
-	nnoremap <expr> n 'Nn'[v:searchforward].'zzzv'
-	onoremap <expr> n 'Nn'[v:searchforward]
-	xnoremap <expr> n 'Nn'[v:searchforward]
-	nnoremap <expr> N 'nN'[v:searchforward].'zzzv'
-	onoremap <expr> N 'nN'[v:searchforward]
-	xnoremap <expr> N 'nN'[v:searchforward]
 endif
 
 " Move up or down a line at a time
@@ -247,6 +246,81 @@ else
 	tnoremap <C-l> <cmd>wincmd l<cr>
 endif
 
+" Resize window using <ctrl + shift + arrow keys
+nnoremap <C-S-Up> <cmd>resize +2<CR>
+nnoremap <C-S-Down> <cmd>resize -2<CR>
+nnoremap <C-S-Left> <cmd>vertical resize -2<CR>
+nnoremap <C-S-Right> <cmd>vertical resize +2<CR>
+
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap <Leader>us :setlocal spell!<CR> " Toggle spelling hints
+nnoremap <Leader>uw :setlocal wrap!<CR>  " Toggle word wrap
+
+" Greatest remap ever
+vnoremap p "_dP
+
+" Next greatest remap ever : asbjornHaland
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
+nnoremap Y y$
+nnoremap <Leader>Y "+y$
+
+fun! EditInitVim()
+	:tabnew $MYVIMRC
+	:new ~/.vimrc
+endfunction
+
+fun! ClearRegisters()
+	let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+	for r in regs
+		call setreg(r, [])
+	endfor
+endfun
+
+fun! TrimWhitespace()
+	let l:save = winsaveview()
+	keeppatterns %s/\s\+$//e
+	call winrestview(l:save)
+endfun
+
+" Close all buffers except this one
+command! BufCloseOthers %bd|e#
+
+" by xolox @ https://stackoverflow.com/a/6271254
+fun! s:get_visual_selection()
+	" Why is this not a built-in Vim script function?!
+	let [line_start, column_start] = getpos("'<")[1:2]
+	let [line_end, column_end] = getpos("'>")[1:2]
+	let lines = getline(line_start, line_end)
+	if len(lines) == 0
+		return ''
+	endif
+	let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+	let lines[0] = lines[0][column_start - 1:]
+	return join(lines, "\n")
+endfunction
+
+" Custom mode for distraction-free editing
+function! ProseMode()
+	call goyo#execute(0, [])
+	set spell noci nosi noai nolist noshowmode noshowcmd
+	set complete+=s
+endfunction
+
+" ES
+command! W w
+
+" More space with NERDTree
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeMarkBookmarks = 0
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeStatusLine = -1
+
+" Tell ack.vim to use ripgrep instead
+let g:ackprg = 'rg --vimgrep --no-heading'
+
 augroup mm_buf_cmds
 	autocmd!
 	" Color Column (only on insert)
@@ -263,10 +337,74 @@ augroup mm_buf_cmds
 " 	autocmd BufEnter * silent! lcd %:p:h
 augroup END
 
+augroup vimrc_filetypes
+	autocmd!
 
-" Lazyvim, etc. already do these, so set g:actual_neovim before calling
-"  'vim.cmd("source .vimrc")' from within init.lua
-if !g:actual_neovim
+	au BufNewFile,BufRead *.cson    set ft=coffee
+	au BufNewFile,BufRead *.glsl    setf glsl
+	au BufNewFile,BufRead *.gyp     set ft=python
+	au BufNewFile,BufRead *.html    setlocal nocindent smartindent
+	au BufNewFile,BufRead *.i7x     setf inform7
+	au BufNewFile,BufRead *.ini     setf conf
+	au BufNewFile,BufRead *.journal setlocal tw=0 ts=4 sw=4 et
+	au BufNewFile,BufRead *.json    set ft=json tw=0
+	au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
+	au BufNewFile,BufRead *.lkml    setf yaml
+	au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
+	au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
+	au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
+	au BufNewFile,BufRead *.plist   setf xml
+	au BufNewFile,BufRead *.rb      setlocal noai
+	au BufNewFile,BufRead *.rxml    setf ruby
+	au BufNewFile,BufRead *.sass    setf sass
+	au BufNewFile,BufRead *.ttml    setf xml
+	au BufNewFile,BufRead *.vert,*.frag set ft=glsl
+	au BufNewFile,BufRead *.xml     setlocal ft=xml ts=2 sw=2 et
+	au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
+	au BufNewFile,BufRead *.zsh     setf zsh
+	au BufNewFile,BufRead *.ovpn    setf openvpn
+	au BufNewFile,BufRead *templates/*.html setf htmldjango
+	au BufNewFile,BufRead .conkyrc set ft=lua
+	au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
+	au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
+	au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
+	au BufNewFile,BufRead .zshlocal setf zsh
+	au BufNewFile,BufRead /tmp/crontab* setf crontab
+	au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
+	au BufNewFile,BufRead Makefile setlocal nolist
+
+	au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
+	au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
+	au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+	au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
+	au FileType markdown syn sync fromstart
+	au FileType markdown setlocal wrap
+	au Filetype gitcommit setlocal tw=80
+	au Filetype csv setlocal nocursorline
+
+augroup END
+
+cd ~
+
+
+" VsVim can't do expressions, so set g:actual_neovim before calling "source .vimrc" from within init.lua
+if g:actual_neovim
+	if g:colemak
+		nnoremap <expr> k 'Nn'[v:searchforward].'zzzv'
+		onoremap <expr> k 'Nn'[v:searchforward]
+		xnoremap <expr> k 'Nn'[v:searchforward]
+		nnoremap <expr> K 'nN'[v:searchforward].'zzzv'
+		onoremap <expr> K 'nN'[v:searchforward]
+		xnoremap <expr> K 'nN'[v:searchforward]
+	else
+		nnoremap <expr> n 'Nn'[v:searchforward].'zzzv'
+		onoremap <expr> n 'Nn'[v:searchforward]
+		xnoremap <expr> n 'Nn'[v:searchforward]
+		nnoremap <expr> N 'nN'[v:searchforward].'zzzv'
+		onoremap <expr> N 'nN'[v:searchforward]
+		xnoremap <expr> N 'nN'[v:searchforward]
+	endif
+else
 	" Nice menu when typing `:find *.py`
 	set wildmode=longest,list,full
 	set wildmenu
@@ -281,145 +419,11 @@ if !g:actual_neovim
 
 	set notimeout
 
-	let loaded_matchparen = 1
-	let mapleader = " "
-	let maplocalleader = " "
-
-	-- Resize window using <ctrl> arrow keys
-	nnoremap <C-S-Up> <cmd>resize +2<CR>
-	nnoremap <C-S-Down> <cmd>resize -2<CR>
-	nnoremap <C-S-Left> <cmd>vertical resize -2<CR>
-	nnoremap <C-S-Right> <cmd>vertical resize +2<CR>
-
-	vnoremap < <gv
-	vnoremap > >gv
-
-	" cd might be worth putting in the actual lua config
-	nnoremap <Leader>cd :cd %:p:h<CR>
-	nnoremap <leader>sh :h <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <leader>u :UndotreeShow<CR>
-
 	nnoremap s /
 	nnoremap S /
 
-	nnoremap <Leader>vim :vim // **<Left><Left><Left><Left>
-
-	nnoremap <Leader>us :setlocal spell!<CR> " Toggle spelling hints
-	nnoremap <Leader>uw :setlocal wrap!<CR>  " Toggle word wrap
-
-	" Greatest remap ever
-	vnoremap p "_dP
-
-	" Next greatest remap ever : asbjornHaland
-	nnoremap <Leader>y "+y
-	vnoremap <Leader>y "+y
-	nnoremap Y y$
-	nnoremap <Leader>Y "+y$
 	nnoremap <Leader>p "+p
 	nnoremap <Leader>P "+P
 	vnoremap <Leader>p "+p
 	vnoremap <Leader>P "+P
-
-	fun! EditInitVim()
-		:tabnew $MYVIMRC
-		:new ~/.vimrc
-	endfunction
-
-	fun! ClearRegisters()
-		let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
-		for r in regs
-			call setreg(r, [])
-		endfor
-	endfun
-
-	fun! TrimWhitespace()
-		let l:save = winsaveview()
-		keeppatterns %s/\s\+$//e
-		call winrestview(l:save)
-	endfun
-
-	" Close all buffers except this one
-	command! BufCloseOthers %bd|e#
-
-	" by xolox @ https://stackoverflow.com/a/6271254
-	fun! s:get_visual_selection()
-		" Why is this not a built-in Vim script function?!
-		let [line_start, column_start] = getpos("'<")[1:2]
-		let [line_end, column_end] = getpos("'>")[1:2]
-		let lines = getline(line_start, line_end)
-		if len(lines) == 0
-			return ''
-		endif
-		let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-		let lines[0] = lines[0][column_start - 1:]
-		return join(lines, "\n")
-	endfunction
-
-	" Custom mode for distraction-free editing
-	function! ProseMode()
-		call goyo#execute(0, [])
-		set spell noci nosi noai nolist noshowmode noshowcmd
-		set complete+=s
-	endfunction
-
-	" ES
-	command! W w
-
-	" More space with NERDTree
-	let g:NERDTreeMinimalUI = 1
-	let g:NERDTreeMarkBookmarks = 0
-	let g:NERDTreeAutoDeleteBuffer = 1
-	let g:NERDTreeStatusLine = -1
-
-	" Tell ack.vim to use ripgrep instead
-	let g:ackprg = 'rg --vimgrep --no-heading'
-
-	augroup vimrc_filetypes
-		autocmd!
-
-		au BufNewFile,BufRead *.cson    set ft=coffee
-		au BufNewFile,BufRead *.glsl    setf glsl
-		au BufNewFile,BufRead *.gyp     set ft=python
-		au BufNewFile,BufRead *.html    setlocal nocindent smartindent
-		au BufNewFile,BufRead *.i7x     setf inform7
-		au BufNewFile,BufRead *.ini     setf conf
-		au BufNewFile,BufRead *.journal setlocal tw=0 ts=4 sw=4 et
-		au BufNewFile,BufRead *.json    set ft=json tw=0
-		au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
-		au BufNewFile,BufRead *.lkml    setf yaml
-		au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
-		au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
-		au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
-		au BufNewFile,BufRead *.plist   setf xml
-		au BufNewFile,BufRead *.rb      setlocal noai
-		au BufNewFile,BufRead *.rxml    setf ruby
-		au BufNewFile,BufRead *.sass    setf sass
-		au BufNewFile,BufRead *.ttml    setf xml
-		au BufNewFile,BufRead *.vert,*.frag set ft=glsl
-		au BufNewFile,BufRead *.xml     setlocal ft=xml ts=2 sw=2 et
-		au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
-		au BufNewFile,BufRead *.zsh     setf zsh
-		au BufNewFile,BufRead *.ovpn    setf openvpn
-		au BufNewFile,BufRead *templates/*.html setf htmldjango
-		au BufNewFile,BufRead .conkyrc set ft=lua
-		au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
-		au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
-		au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
-		au BufNewFile,BufRead .zshlocal setf zsh
-		au BufNewFile,BufRead /tmp/crontab* setf crontab
-		au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
-		au BufNewFile,BufRead Makefile setlocal nolist
-
-		au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
-		au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
-		au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
-		au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
-		au FileType markdown syn sync fromstart
-		au FileType markdown setlocal wrap
-		au Filetype gitcommit setlocal tw=80
-		au Filetype csv setlocal nocursorline
-
-	augroup END
-
-	cd ~
 endif
