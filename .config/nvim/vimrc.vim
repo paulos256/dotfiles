@@ -179,14 +179,14 @@ else
 	" combine lines (stay centered)
 	noremap J mzJ`z
 
-	" more convenient 'inside' motion for yank
-	onoremap o i
-	onoremap O o
-	vnoremap o i
-	vnoremap O o
+	" " more convenient 'inside' motion for yank
+	" onoremap o i
+	" onoremap O o
+	" vnoremap o i
+	" vnoremap O o
 
-	noremap E ge
-	noremap ge E
+	" noremap E ge
+	" noremap ge E
 endif
 
 " Move up or down a line at a time
@@ -261,6 +261,11 @@ nnoremap <Leader>uw :setlocal wrap!<CR>  " Toggle word wrap
 " Greatest remap ever
 vnoremap p "_dP
 
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
+
 " Next greatest remap ever : asbjornHaland
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
@@ -330,61 +335,9 @@ augroup mm_buf_cmds
 		autocmd InsertLeave * set colorcolumn=""
 	endif
 
-	" automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
-	autocmd FileType netrw setl bufhidden=delete
-
 " 	" Sets the current directory to the opened file
 " 	autocmd BufEnter * silent! lcd %:p:h
 augroup END
-
-augroup vimrc_filetypes
-	autocmd!
-
-	au BufNewFile,BufRead *.cson    set ft=coffee
-	au BufNewFile,BufRead *.glsl    setf glsl
-	au BufNewFile,BufRead *.gyp     set ft=python
-	au BufNewFile,BufRead *.html    setlocal nocindent smartindent
-	au BufNewFile,BufRead *.i7x     setf inform7
-	au BufNewFile,BufRead *.ini     setf conf
-	au BufNewFile,BufRead *.journal setlocal tw=0 ts=4 sw=4 et
-	au BufNewFile,BufRead *.json    set ft=json tw=0
-	au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
-	au BufNewFile,BufRead *.lkml    setf yaml
-	au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
-	au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
-	au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
-	au BufNewFile,BufRead *.plist   setf xml
-	au BufNewFile,BufRead *.rb      setlocal noai
-	au BufNewFile,BufRead *.rxml    setf ruby
-	au BufNewFile,BufRead *.sass    setf sass
-	au BufNewFile,BufRead *.ttml    setf xml
-	au BufNewFile,BufRead *.vert,*.frag set ft=glsl
-	au BufNewFile,BufRead *.xml     setlocal ft=xml ts=2 sw=2 et
-	au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
-	au BufNewFile,BufRead *.zsh     setf zsh
-	au BufNewFile,BufRead *.ovpn    setf openvpn
-	au BufNewFile,BufRead *templates/*.html setf htmldjango
-	au BufNewFile,BufRead .conkyrc set ft=lua
-	au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
-	au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
-	au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
-	au BufNewFile,BufRead .zshlocal setf zsh
-	au BufNewFile,BufRead /tmp/crontab* setf crontab
-	au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
-	au BufNewFile,BufRead Makefile setlocal nolist
-
-	au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
-	au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
-	au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
-	au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
-	au FileType markdown syn sync fromstart
-	au FileType markdown setlocal wrap
-	au Filetype gitcommit setlocal tw=80
-	au Filetype csv setlocal nocursorline
-
-augroup END
-
-cd ~
 
 
 " VsVim can't do expressions, so set g:actual_neovim before calling "source .vimrc" from within init.lua
@@ -423,13 +376,58 @@ if g:actual_neovim
 	set wildignore+=**/ios/*
 	set wildignore+=**/.git/*
 
-	nnoremap <Leader>p "+p
-	nnoremap <Leader>P "+P
-	vnoremap <Leader>p "+p
-	vnoremap <Leader>P "+P
-
 	nnoremap s /
 	nnoremap S /
 else
 	set notimeout
+
+
+	augroup vimrc_filetypes
+		autocmd!
+
+		au BufNewFile,BufRead *.cson    set ft=coffee
+		au BufNewFile,BufRead *.glsl    setf glsl
+		au BufNewFile,BufRead *.gyp     set ft=python
+		au BufNewFile,BufRead *.html    setlocal nocindent smartindent
+		au BufNewFile,BufRead *.i7x     setf inform7
+		au BufNewFile,BufRead *.ini     setf conf
+		au BufNewFile,BufRead *.journal setlocal tw=0 ts=4 sw=4 et
+		au BufNewFile,BufRead *.json    set ft=json tw=0
+		au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
+		au BufNewFile,BufRead *.lkml    setf yaml
+		au BufNewFile,BufRead *.md      setlocal ft=markdown nolist spell
+		au BufNewFile,BufRead *.md,*.markdown setlocal foldlevel=999 tw=0 nocin
+		au BufNewFile,BufRead *.ni,*.i7x      setlocal ft=inform7 fdm=manual nolist ts=2 sw=2 noet spell
+		au BufNewFile,BufRead *.plist   setf xml
+		au BufNewFile,BufRead *.rb      setlocal noai
+		au BufNewFile,BufRead *.rxml    setf ruby
+		au BufNewFile,BufRead *.sass    setf sass
+		au BufNewFile,BufRead *.ttml    setf xml
+		au BufNewFile,BufRead *.vert,*.frag set ft=glsl
+		au BufNewFile,BufRead *.xml     setlocal ft=xml ts=2 sw=2 et
+		au BufNewFile,BufRead *.zone    setlocal nolist ts=4 sw=4 noet
+		au BufNewFile,BufRead *.zsh     setf zsh
+		au BufNewFile,BufRead *.ovpn    setf openvpn
+		au BufNewFile,BufRead *templates/*.html setf htmldjango
+		au BufNewFile,BufRead .conkyrc set ft=lua
+		au BufNewFile,BufRead .git/config setlocal ft=gitconfig nolist ts=4 sw=4 noet
+		au BufNewFile,BufRead .gitconfig* setlocal ft=gitconfig nolist ts=4 sw=4 noet
+		au BufNewFile,BufRead .vimlocal,.gvimlocal setf vim
+		au BufNewFile,BufRead .zshlocal setf zsh
+		au BufNewFile,BufRead /tmp/crontab* setf crontab
+		au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
+		au BufNewFile,BufRead Makefile setlocal nolist
+
+		autocmd FileType netrw setl bufhidden=delete " automatically kill phantom buffers created by netrw - https://github.com/tpope/vim-vinegar/issues/13
+		au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet
+		au FileType inform7 setlocal nolist tw=0 ts=4 sw=4 noet foldlevel=999
+		au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+		au FileType make setlocal nolist ts=4 sts=4 sw=4 noet
+		au FileType markdown syn sync fromstart
+		au FileType markdown setlocal wrap
+		au Filetype gitcommit setlocal tw=80
+		au Filetype csv setlocal nocursorline
+	augroup END
+
+	" cd ~
 endif
