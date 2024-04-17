@@ -133,12 +133,6 @@ inoremap <Down> <ESC><Down>
 inoremap <Left> <ESC><Left>
 inoremap <Right> <ESC><Right>
 
-" Temporarily disable arrow keys to get used to non-colemak
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
-
 if g:colemak
 	" f-back and forward
 	noremap h ,
@@ -410,7 +404,13 @@ if g:actual_neovim
 		onoremap <expr> N 'nN'[v:searchforward]
 		xnoremap <expr> N 'nN'[v:searchforward]
 	endif
-else
+
+	" Temporarily disable arrow keys to get used to non-colemak
+	nnoremap <Up> <nop>
+	nnoremap <Down> <nop>
+	nnoremap <Left> <nop>
+	nnoremap <Right> <nop>
+
 	" Nice menu when typing `:find *.py`
 	set wildmode=longest,list,full
 	set wildmenu
@@ -423,13 +423,13 @@ else
 	set wildignore+=**/ios/*
 	set wildignore+=**/.git/*
 
-	set notimeout
-
-	nnoremap s /
-	nnoremap S /
-
 	nnoremap <Leader>p "+p
 	nnoremap <Leader>P "+P
 	vnoremap <Leader>p "+p
 	vnoremap <Leader>P "+P
+
+	nnoremap s /
+	nnoremap S /
+else
+	set notimeout
 endif
