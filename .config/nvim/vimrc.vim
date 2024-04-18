@@ -86,17 +86,21 @@ nnoremap X "_X
 " Quick search
 nnoremap <silent><Leader>/ :let @/='\<<C-r><C-w>\>'<CR>:let @"=@0<CR>:set hlsearch<CR>
 if g:actual_neovim
-	vnoremap <silent><Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>:set hlsearch<CR>  " Escape slashes and square brackets
+	" Escape slashes and square brackets
+	vnoremap <silent><Leader>/ "zy:let @/='\V<C-R>=escape(@z,'/\[]')<CR>'<CR>:let @"=@0<CR>:set hlsearch<CR>
 else
-	vnoremap <Leader>/ "zy:let @/=@z<CR>:set hlsearch<CR>  " Take my chances with slashes and square brackets
+	" Take my chances with slashes and square brackets
+	vnoremap <Leader>/ "zy:let @/=@z<CR>:set hlsearch<CR>
 endif
 
 " Quick replace
 nnoremap <silent><Leader>sr :%s/\<<C-r><C-w>\>//I<Left><Left>
 if g:actual_neovim
-	vnoremap <silent><Leader>sr "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>  " Escape slashes and square brackets
+	" Escape slashes and square brackets
+	vnoremap <silent><Leader>sr "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
 else
-	vnoremap <Leader>sr "zy:let @/=@z:%s///I<Left><Left>  " Take my chances with slashes and square brackets
+	" Take my chances with slashes and square brackets
+	vnoremap <Leader>sr "zy:let @/=@z:%s///I<Left><Left>
 endif
 
 " Tabs
@@ -179,14 +183,14 @@ else
 	" combine lines (stay centered)
 	noremap J mzJ`z
 
-	" " more convenient 'inside' motion for yank
-	" onoremap o i
-	" onoremap O o
-	" vnoremap o i
-	" vnoremap O o
+	" more convenient 'inside' motion for yank
+	onoremap o i
+	onoremap O o
+	vnoremap o i
+	vnoremap O o
 
-	" noremap E ge
-	" noremap ge E
+	noremap E ge
+	noremap ge E
 endif
 
 " Move up or down a line at a time
@@ -381,6 +385,9 @@ if g:actual_neovim
 else
 	set notimeout
 
+	" These are super handy in mini.ai, so add them to VsVim
+	vnoremap ie iw
+	onoremap ie iw
 
 	augroup vimrc_filetypes
 		autocmd!
