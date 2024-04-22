@@ -58,7 +58,7 @@ colorscheme Default-256 Default gruvbox
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
-set timefmt=%m/%d\ %H:%M
+set timefmt=%Y-%m-%d\ %H:%M
 
 " Show list of matches on tab completion in command-line mode
 set wildmenu
@@ -417,7 +417,10 @@ nnoremap cc cw<c-u>
 nnoremap A cw<c-e>
 
 nnoremap <space> <nop>
-nnoremap D :mkdir! 
+nnoremap D :mkdir!<Space>
+nnoremap <space>f :filter!<Space>
+nnoremap <space>F :filter<CR>
+nnoremap <space>e :!explorer .<CR>
 
 if has('win')
 	" Start shell in current directory
