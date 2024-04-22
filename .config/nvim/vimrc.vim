@@ -70,12 +70,6 @@ endif
 " Marks should go to the column, not just the line. Why isn't this the default?
 nnoremap ' `
 
-" consistent navigation with word wrap
-nnoremap <Up> g<Up>
-nnoremap <Down> g<Down>
-vnoremap <Down> <Down>
-vnoremap <Up> <Up>
-
 " Don't need the line break at the end
 vnoremap $ $<Left>
 inoremap <C-BS> <C-w>
@@ -194,25 +188,25 @@ else
 endif
 
 " Move up or down a line at a time
-nnoremap <A-Up> <cmd>m .-2<CR>
 nnoremap <A-Down> <cmd>m .+1<CR>
-inoremap <A-Up> <cmd>m '<-2<CR>gi
-inoremap <A-Down> <cmd>m '>+1<CR>gi
-vnoremap <A-Up> <cmd>m '<-2<CR>gv
+nnoremap <A-Up> <cmd>m .-2<CR>
+inoremap <A-Down> <cmd>m .+1<CR>gi
+inoremap <A-Up> <cmd>m .-2<CR>gi
 vnoremap <A-Down> <cmd>m '>+1<CR>gv
+vnoremap <A-Up> <cmd>m '<-2<CR>gv
 " Lazy colemak remaps
 if g:colemak
 	nnoremap <A-n> <cmd>m .+1<CR>
 	nnoremap <A-e> <cmd>m .-2<CR>
-	inoremap <A-n> <cmd>m '>+1<CR>gi
-	inoremap <A-e> <cmd>m '<-2<CR>gi
+	inoremap <A-n> <cmd>m .+1<CR>gi
+	inoremap <A-e> <cmd>m .-2<CR>gi
 	vnoremap <A-n> <cmd>m '>+1<CR>gv
 	vnoremap <A-e> <cmd>m '<-2<CR>gv
 else
 	nnoremap <A-j> <cmd>m .+1<CR>
 	nnoremap <A-k> <cmd>m .-2<CR>
-	inoremap <A-j> <cmd>m '>+1<CR>gi
-	inoremap <A-k> <cmd>m '<-2<CR>gi
+	inoremap <A-j> <cmd>m .+1<CR>gi
+	inoremap <A-k> <cmd>m .-2<CR>gi
 	vnoremap <A-j> <cmd>m '>+1<CR>gv
 	vnoremap <A-k> <cmd>m '<-2<CR>gv
 endif
@@ -362,11 +356,17 @@ if g:actual_neovim
 		xnoremap <expr> N 'nN'[v:searchforward]
 	endif
 
-	" Temporarily disable arrow keys to get used to non-colemak
-	nnoremap <Up> <nop>
-	nnoremap <Down> <nop>
-	nnoremap <Left> <nop>
-	nnoremap <Right> <nop>
+	" " Consistent navigation with word wrap
+	" nnoremap <Up> g<Up>
+	" nnoremap <Down> g<Down>
+	" vnoremap <Down> <Down>
+	" vnoremap <Up> <Up>
+
+	" Temporarily disable arrow keys to get used to non-colemak navigation
+	noremap <Up> <nop>
+	noremap <Down> <nop>
+	noremap <Left> <nop>
+	noremap <Right> <nop>
 
 	" Nice menu when typing `:find *.py`
 	set wildmode=longest,list,full
