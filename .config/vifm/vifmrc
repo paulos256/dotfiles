@@ -1,4 +1,4 @@
-" vim: filetype=vifm :
+" vim: filetype=vim
 " Sample configuration file for vifm (last updated: 31 August, 2021)
 " You can edit this file by hand.
 " The " character at the beginning of a line comments out the line.
@@ -125,7 +125,6 @@ command! run !! ./%f
 command! mkcd :mkdir %a | cd %a
 " command! vgrep vim "+grep %a"
 command! reload :write | restart full
-command! rg :grep
 
 " ------------------------------------------------------------------------------
 

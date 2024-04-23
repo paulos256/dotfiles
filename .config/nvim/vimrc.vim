@@ -91,7 +91,7 @@ endif
 nnoremap <silent><Leader>sr :%s/\<<C-r><C-w>\>//I<Left><Left>
 if g:actual_neovim
 	" Escape slashes and square brackets
-	vnoremap <silent><Leader>sr "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left>
+	vnoremap <silent><Leader>sr "zy:%s/\V<C-R>=escape(@z,'/\[]')<CR>//I<Left><Left><Space><BS>
 else
 	" Take my chances with slashes and square brackets
 	vnoremap <Leader>sr "zy:let @/=@z:%s///I<Left><Left>
