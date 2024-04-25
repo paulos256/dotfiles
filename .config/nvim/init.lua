@@ -1,5 +1,5 @@
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
@@ -39,7 +39,6 @@ vim.opt.rtp:prepend(lazypath)
 require 'lazy-plugins'
 
 vim.cmd.colorscheme("slate")
-vim.o.background = "dark" -- or "light" for light mode
 
 
 -- I hope you enjoy your Neovim journey,
@@ -127,3 +126,5 @@ If you experience any errors while trying to install kickstart, run `:checkhealt
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
+
+-- vim: ts=2 sts=2 sw=2 et
