@@ -2,7 +2,7 @@ let g:colemak=0
 
 set guicursor=n-v:block,i-c-ci-ve:ver25,o:hor50,a:blinkoff0-Cursor/lCursor
 "  \,r-cr:block-blinkwait100-blinkoff100-blinkon100
-set nohidden  " DO NOT allow dirty background buffers
+set hidden  " ALLOW dirty background buffers
 set noerrorbells
 set timeoutlen=700
 set visualbell
@@ -102,7 +102,8 @@ nnoremap <C-Tab> gt
 nnoremap <C-S-Tab> gT
 
 nnoremap <Leader>wt :wincmd T<CR>
-nnoremap <Leader>qq :q<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>QQ :bd!<CR>:q<CR>
 
 " got sick of accidentally hitting these
 nnoremap U <Nop>
