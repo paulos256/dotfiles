@@ -2,13 +2,12 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
-local function augroup(name)
-  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
-end
+
+local my_augroup = vim.api.nvim_create_augroup("paulos-augroup", { clear = true })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
+  group = my_augroup,
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
@@ -18,9 +17,17 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+-- -- randomly change the background color
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   group = vim.api.nvim_create_augroup("random-hue-group", { clear = true }),
+--   callback = function()
+--     vim.cmd("colorscheme randomhue")
+--   end,
+-- })
+
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("checktime"),
+  group = my_augroup,
   callback = function()
     if vim.o.buftype ~= "nofile" then
       vim.cmd("checktime")
@@ -30,7 +37,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = my_augroup,
   pattern = {
     "PlenaryTestPopup",
     "help",
@@ -54,7 +61,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("man_unlisted"),
+  group = my_augroup,
   pattern = { "man" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -63,7 +70,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
+  group = my_augroup,
   pattern = { "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
@@ -73,7 +80,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("json_conceal"),
+  group = my_augroup,
   pattern = { "json", "jsonc", "json5" },
   callback = function()
     vim.opt_local.conceallevel = 0
@@ -82,10 +89,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+  group = my_augroup,
   callback = function()
     vim.highlight.on_yank()
   end,
 })
 
-
+-- vim: ts=2 sts=2 sw=2 et
