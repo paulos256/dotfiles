@@ -419,7 +419,7 @@ nnoremap <space> <nop>
 nnoremap D :mkdir!<Space>
 nnoremap <space>f :filter!<Space>
 nnoremap <space>F :filter<CR>
-nnoremap <space>e :!explorer .<CR>
+nnoremap <space>e :!start, explorer .<CR>
 
 if has('win')
 	" Start shell in current directory
@@ -433,9 +433,7 @@ endif
 nnoremap S :sort<cr>
 
 " Toggle visibility of preview window
-:view!
-" nnoremap w :view!<cr>
-nnoremap w <nop>
+nnoremap w :view<cr>
 
 nnoremap <space> <nop>
 nnoremap <space>qq :exit<cr>
