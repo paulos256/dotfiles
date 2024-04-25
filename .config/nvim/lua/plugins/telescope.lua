@@ -78,8 +78,10 @@ return {
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]ile' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent file ("." for repeat)' })
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffer' })
-      vim.keymap.set('n', '<leader>fC', builtin.colorscheme, { desc = 'Colorscheme with preview' })
-      -- vim.keymap.set('n', '<leader>fC', builtin.colorscheme({ enable_preview = true }), { desc = 'Colorscheme with preview' })
+
+      vim.keymap.set('n', '<leader>fC', function()
+        builtin.colorscheme { enable_preview = true }
+      end, { desc = 'Colorscheme with preview' })
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>fc', function()
@@ -93,17 +95,18 @@ return {
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch for current [W]ord' })
       vim.keymap.set('v', '<leader>sw', builtin.grep_string, { desc = '[S]earch for current [W]ord' })
       vim.keymap.set('n', '<leader>sR', builtin.resume, { desc = '[S]earch [R]esume' })
-
       vim.keymap.set('n', '<leader>s"', builtin.registers, { desc = '[S]earch [R]egisters' })
       vim.keymap.set('n', '<leader>sa', builtin.autocommands, { desc = '[S]earch [A]utocommands' })
       vim.keymap.set('n', '<leader>sc', builtin.command_history, { desc = '[S]earch [C]ommand history' })
       vim.keymap.set('n', '<leader>sC', builtin.commands, { desc = '[S]earch all [C]ommands' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch document [D]iagnostics' })
-      -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics({ bufnr=0 }), { desc = '[S]earch document [D]iagnostics' })
       vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = '[S]earch workspace [D]iagnostics' })
       vim.keymap.set('n', '<leader>sH', builtin.highlights, { desc = '[S]earch [H]ighlight Groups' })
       vim.keymap.set('n', '<leader>so', builtin.vim_options, { desc = '[S]earch Neovim [O]ptions' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]earches' })
+
+      vim.keymap.set('n', '<leader>sd', function()
+        builtin.diagnostics { bufnr=0 }
+      end, { desc = '[S]earch document [D]iagnostics' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>sb', function()
@@ -112,8 +115,7 @@ return {
           winblend = 10,
           previewer = false,
         })
-      end,
-      { desc = '[S]earch fuzzily in current [B]uffer' })
+      end, { desc = '[S]earch fuzzily in current [B]uffer' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -122,8 +124,7 @@ return {
           grep_open_files = true,
           prompt_title = 'Live Grep in Open Files',
         }
-      end,
-      { desc = '[S]earch fuzzily in all open [B]uffers' })
+      end, { desc = '[S]earch fuzzily in all open [B]uffers' })
 
     end,
   },
