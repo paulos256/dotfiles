@@ -4,8 +4,6 @@ return {
   -- location.
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
-    vscode = true,
     ---@type Flash.Config
     opts = { modes = { search = { enabled = false, } } }, -- Disable flash on default sort
     -- stylua: ignore
