@@ -9,7 +9,7 @@ set visualbell
 set nowrap
 set formatoptions+=1qjro
 
-set clipboard+="unnamedplus"
+set clipboard=
 
 set tabstop=3 softtabstop=0 shiftwidth=0
 set shiftround                   " Shift to certain columns, not just n spaces
@@ -260,6 +260,7 @@ nnoremap <Leader>uw :setlocal wrap!<CR>  " Toggle word wrap
 " Greatest remap ever
 vnoremap p "_dP
 
+" Paste from clipboard
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p

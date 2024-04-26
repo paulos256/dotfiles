@@ -95,7 +95,7 @@ return {
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch for current [W]ord' })
       vim.keymap.set('v', '<leader>sw', builtin.grep_string, { desc = '[S]earch for current [W]ord' })
       vim.keymap.set('n', '<leader>sR', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s"', builtin.registers, { desc = '[S]earch [R]egisters' })
+      vim.keymap.set('n', '<leader>sp', builtin.registers, { desc = '[S]earch [p]Registers' })
       vim.keymap.set('n', '<leader>sa', builtin.autocommands, { desc = '[S]earch [A]utocommands' })
       vim.keymap.set('n', '<leader>sc', builtin.command_history, { desc = '[S]earch [C]ommand history' })
       vim.keymap.set('n', '<leader>sC', builtin.commands, { desc = '[S]earch all [C]ommands' })
