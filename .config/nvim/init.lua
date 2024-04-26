@@ -15,6 +15,22 @@ if vim.fn.has("nvim-0.10") == 1 then
 end
 
 -- [[ Keymaps ]]
+vim.keymap.set("n", "<leader>q", function()
+  local b_count;
+  b_count = 0;
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, 'buftype') == '' then
+      b_count = b_count + 1
+    end
+  end
+
+  if b_count <= 1 then
+    vim.cmd([[confirm q]])
+  else
+    vim.cmd([[confirm bd]])
+  end
+end, { desc = "Quit buffer or entire window" })
+
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
