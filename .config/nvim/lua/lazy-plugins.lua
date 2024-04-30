@@ -28,23 +28,24 @@ require('lazy').setup({
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
 
-  require 'plugins/gitsigns',
-  require 'plugins/which-key',
-  require 'plugins/telescope',
-  require 'plugins/lspconfig',
-  require 'plugins/conform',
-  require 'plugins/cmp',
-  require 'plugins/tokyonight',
-  require 'plugins/todo-comments',
-  require 'plugins/mini',
-  require 'plugins/treesitter',
-  require 'plugins/harpoon2',
+  require 'plugins.gitsigns',
+  require 'plugins.which-key',
+  require 'plugins.telescope',
+  require 'plugins.lspconfig',
+  require 'plugins.conform',
+  require 'plugins.cmp',
+  require 'plugins.tokyonight',
+  require 'plugins.todo-comments',
+  require 'plugins.mini',
+  require 'plugins.treesitter',
+  require 'plugins.harpoon2',
 
   -- I added these from LazyVim
-  require 'plugins/flash',
-  require 'plugins/vim-illuminate',
-  require 'plugins/trouble',
-  require 'plugins/yanky',
+  require 'plugins.flash',
+  require 'plugins.vim-illuminate',
+  require 'plugins.trouble',
+  require 'plugins.yanky',
+  require 'plugins.autopairs',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -58,7 +59,6 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
 
   {
