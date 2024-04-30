@@ -77,7 +77,8 @@ return {
   -- Show context of the current function
   {
     "nvim-treesitter/nvim-treesitter-context",
-    opts = { mode = "cursor", max_lines = 3 },
+    opts = { mode = "cursor", max_lines = 7 },
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     keys = {
       { "<leader>uT", "<cmd>TSContextToggle<CR>", { desc = "Toggle Treesitter Context", }, },
     },
