@@ -416,7 +416,7 @@ nnoremap cc cw<c-u>
 nnoremap A cw<c-e>
 
 nnoremap <space> <nop>
-nnoremap D :mkdir!<Space>
+nnoremap D :mkdir!<Space>""<Left>
 nnoremap <space>f :filter!<Space>
 nnoremap <space>F :filter<CR>
 nnoremap <space>e :!start, explorer .<CR>
@@ -451,11 +451,11 @@ nnoremap <space>qq :exit<cr>
 " Interaction with system clipboard
 if has('win')
     " Yank current directory path to Windows clipboard with forward slashes
-    nnoremap yd :!<NUL set /p=%"d%i| clip<cr>
+    nnoremap yd :!<NUL set /p=%"c:p:h:S%i|clip<cr>
     " Yank just current file name to Windows clipboard with forward slashes
-    nnoremap yF :!<NUL set /p=%"c:r%i| clip<cr>
+    nnoremap yF :!<NUL set /p=%"c:r%i|clip<cr>
     " Yank full path to current file to Windows clipboard with forward slashes
-    nnoremap yf :!<NUL set /p=%"c:p%i| clip<cr>
+    nnoremap yf :!<NUL set /p=%"c:p%i|clip<cr>
 elseif executable('xclip')
     " Yank current directory path into the clipboard
     nnoremap yd :!echo %d | xclip %i<cr>
