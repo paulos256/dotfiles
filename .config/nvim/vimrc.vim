@@ -258,7 +258,8 @@ nnoremap <Leader>us :setlocal spell!<CR> " Toggle spelling hints
 nnoremap <Leader>uw :setlocal wrap!<CR>  " Toggle word wrap
 
 " Greatest remap ever
-vnoremap p "_dP
+vnoremap p P
+vnoremap P p
 
 " Paste from clipboard
 nnoremap <Leader>p "+p
@@ -266,7 +267,7 @@ nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-" Next greatest remap ever : asbjornHaland
+" Yank to clipboard : asbjornHaland
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
 nnoremap Y y$
