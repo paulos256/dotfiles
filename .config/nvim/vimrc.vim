@@ -382,11 +382,11 @@ if g:actual_neovim
 	set wildignore+=**/android/*
 	set wildignore+=**/ios/*
 	set wildignore+=**/.git/*
+else
+	set notimeout
 
 	nnoremap s /
 	nnoremap S /
-else
-	set notimeout
 
 	" These are super handy in mini.ai, so add them to VsVim
 	vnoremap ie iw
