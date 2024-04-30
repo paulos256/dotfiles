@@ -63,7 +63,7 @@ require('lazy').setup({
 
   {
     "equalsraf/neovim-gui-shim",
-    enabled = true,
+    enabled = not vim.g.neovide,
     config = function()
       vim.cmd([[GuiRenderLigatures 0]])
       vim.cmd([[GuiWindowOpacity 0.95]])

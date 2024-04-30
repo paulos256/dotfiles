@@ -56,6 +56,20 @@ require 'lazy-plugins'
 
 vim.cmd.colorscheme("slate")
 
+vim.opt.guifont="Cascadia Code PL:h9"
+
+-- Control + Scroll to change display size
+if vim.g.neovide then
+  local change_it = function(amount)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + amount
+    print(vim.g.neovide_scale_factor)
+  end
+
+  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelUp>", function() change_it(0.1) end)
+  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelDown>", function() change_it(-0.1) end)
+  vim.keymap.set({ "n", "v" }, "<C-0><C-0>", function() vim.g.neovide_scale_factor = 1 end)
+end
+
 
 -- I hope you enjoy your Neovim journey,
 --   TJ
