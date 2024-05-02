@@ -58,6 +58,7 @@ vim.cmd.colorscheme("slate")
 
 vim.opt.guifont="Cascadia Code PL:h9"
 
+-- from https://neovide.dev/faq.html
 -- Control + Scroll to change display size
 if vim.g.neovide then
   local change_it = function(amount)
@@ -69,6 +70,9 @@ if vim.g.neovide then
   vim.keymap.set({ "n", "v" }, "<C-ScrollWheelDown>", function() change_it(-0.1) end)
   vim.keymap.set({ "n", "v" }, "<C-0><C-0>", function() vim.g.neovide_scale_factor = 1 end)
 end
+
+-- Set transparency and background color (title bar color)
+vim.g.neovide_transparency = 0.93
 
 
 -- I hope you enjoy your Neovim journey,
