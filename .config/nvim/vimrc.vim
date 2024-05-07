@@ -126,12 +126,6 @@ noremap <C-s> <cmd>w<cr><esc>
 noremap <C-S-s> <cmd>wa<cr><esc>
 nnoremap <silent> <Esc> :noh<Esc>
 
-" Destroy arrow keys in insert mode
-inoremap <Up> <ESC><Up>
-inoremap <Down> <ESC><Down>
-inoremap <Left> <ESC><Left>
-inoremap <Right> <ESC><Right>
-
 if g:colemak
 	" f-back and forward
 	noremap h ,
@@ -371,6 +365,12 @@ if g:actual_neovim
 	noremap <Left> <nop>
 	noremap <Right> <nop>
 
+	" Arrow keys exit insert mode
+	inoremap <Up> <ESC><Up>
+	inoremap <Down> <ESC><Down>
+	inoremap <Left> <ESC><Left>
+	inoremap <Right> <ESC><Right>
+
 	" Nice menu when typing `:find *.py`
 	set wildmode=longest,list,full
 	set wildmenu
@@ -382,7 +382,10 @@ if g:actual_neovim
 	set wildignore+=**/android/*
 	set wildignore+=**/ios/*
 	set wildignore+=**/.git/*
+
+	cd ~
 else
+	" VsVim
 	set notimeout
 
 	nnoremap s /
