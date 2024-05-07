@@ -141,9 +141,9 @@
 {kp-lshift}{kp-lctrl}{kp6}>{-lctrl}{end}{+lctrl}
 [kpplus]>[null]
 {kpplus}>{-lshift}{;}{+lshift}
-{kp-ctrl}{kpplus}>{-ctrl}{;}{+ctrl}
+{kp-lctrl}{kpplus}>{-lshift}{-lctrl}{;}{+lctrl}{+lshift}
 {kp-lshift}{kpplus}>{;}
-{kp-ctrl}{kp-lshift}{kpplus}>{-ctrl}{;}{+ctrl}
+{kp-lctrl}{kp-lshift}{kpplus}>{-lctrl}{;}{+lctrl}
 [kp-lshift]>[null]
 [kp-;]>[\]
 [kp-q]>[,]
@@ -180,6 +180,6 @@
 [kp-end]>[null]
 [kp-pdown]>[lctrl]
 [kp-up]>[lshift]
-[kp-down]>[rctrl]
+[kp-down]>[lctrl]
 [kp.]>[lalt]
 [kpenter2]>[tab]
