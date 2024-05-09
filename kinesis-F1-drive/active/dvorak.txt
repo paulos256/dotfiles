@@ -139,11 +139,7 @@
 [kp6]>[right]
 {kp-lshift}{kp6}>{end}
 {kp-lshift}{kp-lctrl}{kp6}>{-lctrl}{end}{+lctrl}
-[kpplus]>[null]
-{kpplus}>{-lshift}{;}{+lshift}
-{kp-lctrl}{kpplus}>{-lshift}{-lctrl}{;}{+lctrl}{+lshift}
-{kp-lshift}{kpplus}>{;}
-{kp-lctrl}{kp-lshift}{kpplus}>{-lctrl}{;}{+lctrl}
+[kpplus]>[;]
 [kp-lshift]>[null]
 [kp-;]>[\]
 [kp-q]>[,]
