@@ -172,11 +172,8 @@ else
 	" combine lines (stay centered)
 	noremap J mzJ`z
 
-	" more convenient 'inside' motion for yank
-	onoremap o i
-	onoremap O o
-	vnoremap o i
-	vnoremap O o
+	" more convenient 'inside' motion for yank on a colemak keyboard
+	nnoremap yo yi
 
 	noremap E ge
 	noremap ge E
