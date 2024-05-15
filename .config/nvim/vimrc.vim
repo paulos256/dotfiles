@@ -171,12 +171,6 @@ else
 
 	" combine lines (stay centered)
 	noremap J mzJ`z
-
-	" more convenient 'inside' motion for yank on a colemak keyboard
-	nnoremap yo yi
-
-	noremap E ge
-	noremap ge E
 endif
 
 " Move up or down a line at a time
