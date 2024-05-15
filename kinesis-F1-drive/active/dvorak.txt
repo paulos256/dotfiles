@@ -161,8 +161,6 @@
 [kp-pdown]>[kpshft]
 [kp-enter]>[kp-lshift]
 [kp0]>[enter]
-{kp-lshift}{kp0}>{-lshift}{hyphen}{+lshift}
-{kp-lshift}{kp-lctrl}{kp0}>{-lshift}{=}{+lshift}
 [kp-b]>[null]
 {kp-lshift}{kp-b}>{,}
 [kp1]>[lshift]
