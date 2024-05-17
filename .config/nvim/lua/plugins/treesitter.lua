@@ -27,6 +27,7 @@ return {
         "vimdoc",
 --      "xml",
 --      "yaml",
+        "zig",
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
