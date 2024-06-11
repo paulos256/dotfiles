@@ -351,17 +351,17 @@ if g:actual_neovim
 		xnoremap <expr> N 'nN'[v:searchforward]
 	endif
 
-	" " Consistent navigation with word wrap
-	" nnoremap <Up> g<Up>
-	" nnoremap <Down> g<Down>
-	" vnoremap <Down> <Down>
-	" vnoremap <Up> <Up>
+	" Consistent navigation with word wrap
+	nnoremap <Up> g<Up>
+	nnoremap <Down> g<Down>
+	vnoremap <Down> <Down>
+	vnoremap <Up> <Up>
 
-	" Temporarily disable arrow keys to get used to non-colemak navigation
-	noremap <Up> <nop>
-	noremap <Down> <nop>
-	noremap <Left> <nop>
-	noremap <Right> <nop>
+	" " Temporarily disable arrow keys to get used to non-colemak navigation
+	" noremap <Up> <nop>
+	" noremap <Down> <nop>
+	" noremap <Left> <nop>
+	" noremap <Right> <nop>
 
 	" Arrow keys exit insert mode
 	inoremap <Up> <ESC><Up>
