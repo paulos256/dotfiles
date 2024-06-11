@@ -423,7 +423,7 @@ nnoremap <space>e :!start, explorer .<CR>
 
 if has('win')
 	" Start shell in current directory
-	nnoremap <space>t :shell<cr>
+	nnoremap <space>t :!start, cmd<cr>
 else
 	" Open console in current directory
 	nnoremap <space>t :!xterm &<cr>
@@ -501,7 +501,7 @@ nnoremap <a-o> :sync %c<cr>
 " Various customization examples
 
 " Use rg (the silver searcher) instead of grep
-set grepprg='rg --line-numbers %i %a %s'
+set grepprg='rg --line-number %i %a %s'
 
 " " Use ag (the silver searcher) instead of grep
 " set grepprg='ag --line-numbers %i %a %s'
